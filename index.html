@@ -1,0 +1,742 @@
+<html><head>
+    <title>three.js css3d - periodic table</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/slider.css" />
+</head>
+<body>
+<SCRIPT LANGUAGE="JavaScript">
+function password(){
+  var testV = 1;
+  var pass1 = prompt('Please enter password:','');
+  while (testV < 3) {
+    if (!pass1)
+        history.go(-1);
+    if (pass1 == "930515"){
+      break;
+    }
+    testV += 1;
+    var pass1 = prompt('wrong pwd!');
+  }
+  if (pass1!="password" & testV ==3)
+    history.go(-1);
+  return " ";
+}
+document.write(password());
+</SCRIPT>
+<script src="js/libs/three.js"></script>
+<script src="js/libs/tween.min.js"></script>
+<script src="js/libs/jquery-3.3.1.min.js"></script>
+<script src="js/CSS3DRenderer.js"></script>
+<script src="js/libs/parallax.js"></script>
+
+ <ul id="scene">
+  <li class="layer" id="specks" data-depth="0.1"></li>
+  <li class="layer" id="layer-1" data-depth="0.15">
+    <div class="img" id="img-1"></div>
+  </li>
+  <li class="layer" id="layer-2" data-depth="0.25">
+    <div class="img" id="img-2"></div>
+  </li>
+  <li class="layer" id="layer-3" data-depth="0.45">
+    <div class="img" id="img-3"></div>
+  </li>
+</ul> 
+
+<div id="container"></div>
+
+<div id="menu">
+    <button id="zoomOut" onclick="zoomout()">ZOOM OUT</button>
+</div>
+
+<div id="cont" class="cont">
+    <div class="slider"></div>
+    <ul class="nav"></ul>
+    <div data-target='right' class="side-nav side-nav--right"></div>
+    <div data-target='left' class="side-nav side-nav--left"></div>
+</div>
+
+<script type="text/javascript" src="js/slider.js"></script>
+<script>
+
+    //setup background
+    var scene = document.getElementById('scene');
+    var parallax = new Parallax(scene);
+    for (var i = 1; i < 6; i++) {
+        // if (window.CP.shouldStopExecution(1)) {
+        //     break;
+        // }
+        twinkleLoop(i);
+    }
+    // window.CP.exitedLoop(1);
+    function twinkleLoop(i) {
+        var duration = Math.random() * 5 + 3;
+        duration = duration - (495 - speed) / 100;
+        twinkle(i, duration);
+        setTimeout(function () {
+            twinkleLoop(i);
+        }, duration * 1000);
+    }
+    function twinkle(id, duration) {
+        var top = Math.floor(Math.random() * 85) + 0 + '%';
+        var left = Math.floor(Math.random() * 85) + 0 + '%';
+        $('#speck' + id).remove();
+        $('#specks').append('<div class=\'speck\' id=\'speck' + id + '\'></div>');
+        $('#speck' + id).css({
+            'top': top,
+            'left': left,
+            'animation-duration': duration + 's',
+            'animation-timing-function': 'cubic-bezier(0.250, 0.250, 0.750, 0.750)',
+            'animation-name': 'twinkle'
+        });
+    }
+    var speed = 400;
+    $(document).ready(function () {
+        $('#slider').on('change', function () {
+            $('.speck').remove();
+            for (var i = 1; i < 4; i++) {
+                speed = 201 - this.value;
+                $('#range').text('1000px / ' + speed / 10 + 's');
+                speed = speed * (i / 1.25);
+                $('#img-' + i).css({
+                    'animation-duration': speed + 's',
+                    'animation-name': 'float'
+                });
+            }
+        });
+    });
+
+    var table = [
+        'a11.png','a12.png',
+        'a21.png','a22.png',
+        'a31.png','a32.png',
+        'a41.png','a42.png',
+        'a51.png','a52.png',
+        'a61.png','a62.png',
+        'a71.png','a72.png',
+        'a81.png','a82.png'
+    ];
+
+    var table2 = [
+        'a11.png','a12.png',
+        'a21.png','a22.png',
+        'a31.png','a32.png',
+        'a41.png','a42.png',
+        'a51.png','a52.png',
+        'a61.png','a62.png',
+        'a71.png','a72.png',
+        'a81.png','a82.png'
+    ];
+
+    var table3 = [
+        'a11.png','a12.png',
+        'a21.png','a22.png',
+        'a31.png','a32.png',
+        'a41.png','a42.png',
+        'a51.png','a52.png',
+        'a61.png','a62.png',
+        'a71.png','a72.png',
+        'a81.png','a82.png'
+    ];
+
+    var table4 = [
+        'a11.png','a12.png',
+        'a21.png','a22.png',
+        'a31.png','a32.png',
+        'a41.png','a42.png',
+        'a51.png','a52.png',
+        'a61.png','a62.png',
+        'a71.png','a72.png',
+        'a81.png','a82.png'
+    ];
+
+
+    var camera, scene, renderer;
+    var popoutObj;
+
+    var objects = [], objects2 = [], objects3 = [], objects4 = [], group, group2, group3, group4;
+    var targets = { sphere: [], sphere2: [], sphere3: [], sphere4: []};
+    var zoomed = false;
+    var selectedPlanet = false;
+    var planetIdx = 0;
+    var tmpVec;
+
+    // init(animate);
+
+    function init(callback) {
+        group = new THREE.Group();
+        group.position.set(0, 0, 0);
+        group.rotation.set(0, 0, 0);
+
+        group2 = new THREE.Group();
+        group2.position.set(1600, 0, 0);
+        group2.rotation.set(0, 0, 0);   
+
+        group3 = new THREE.Group();
+        group3.position.set(2800, 0, 0);
+        group3.rotation.set(0, 0, 0);   
+
+        group4 = new THREE.Group();
+        group4.position.set(4000, 0, 0);
+        group4.rotation.set(0, 0, 0);        
+
+        camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
+        camera.position.y = 3000;
+        camera.position.z = 10000;
+        scene = new THREE.Scene();
+        camera.lookAt(scene.position);
+        tmpVec = new THREE.Vector3();
+        tmpVec.x = 0;
+        tmpVec.y = 0;
+        tmpVec.z = 0;
+
+        // sphere
+        createSphere(1, table, targets.sphere, objects, group, 800);
+        createSphere(2, table2, targets.sphere2, objects2, group2, 400);
+        createSphere(3, table3, targets.sphere3, objects3, group3, 400);
+        createSphere(4, table4, targets.sphere4, objects4, group4, 400);
+
+        renderer = new THREE.CSS3DRenderer();
+        renderer.setSize( window.innerWidth, window.innerHeight );
+        renderer.domElement.style.position = 'absolute';
+        document.getElementById( 'container' ).appendChild( renderer.domElement );
+
+        transform( 2000 );
+
+        window.addEventListener( 'resize', onWindowResize, false );
+        callback();
+    }
+
+    function createSphere(idx, data, container, objs, g, r){
+        var vector = new THREE.Vector3();
+        var spherical = new THREE.Spherical();
+        for ( var i = 0; i < data.length; i += 2 ) {
+            var element = document.createElement( 'div' );
+            element.id = 'element'+i;
+            element.className = 'element';
+            element.style.backgroundColor = 'rgba(0,127,127,' + ( Math.random() * 0.5 + 0.25 ) + ')';
+            element.onclick = function(){
+                if(zoomed){
+                    var currentGroup = group;
+                    var imgHeight = 560;
+                    var posiZ = 840;
+                    switch(planetIdx){
+                        case 2:
+                            currentGroup = group2;
+                            imgHeight = 340;
+                            posiZ = 440;
+                            break;
+                        case 3:
+                            currentGroup = group3;
+                            imgHeight = 340;
+                            posiZ = 440;
+                            break;
+                        case 4:
+                            currentGroup = group4;  
+                            imgHeight = 340;
+                            posiZ = 440;
+                            break;
+                    }
+                    for(var i = 0, len = objs.length; i < len; i++){
+                        if(this.id === objs[i].element.id){
+                            var ele = document.createElement( 'div' );
+                            ele.className = 'element2';
+
+                            var symbol = document.createElement( 'img' );
+                            symbol.className = 'symbol';
+                            symbol.src = 'img/scene'+idx+'/'+data[ i+1 ];
+                            symbol.style.height = imgHeight + 'px';
+                            ele.appendChild( symbol );
+
+                            var symbol2 = document.createElement( 'img' );
+                            symbol2.className = 'symbol';
+                            symbol2.src = 'img/scene'+idx+'/'+data[ i ];
+                            symbol2.style.height = imgHeight + 'px';
+                            ele.appendChild( symbol2 );
+
+                            var close = document.createElement( 'div' );
+                            close.className = 'closeButton';
+                            close.textContent = 'X';
+                            ele.appendChild( close );
+
+                            close.onclick = function(i){
+                                for(let j = 0, len2 = objs.length; j < len2; j++){
+                                    objs[j].element.style.display = 'block';    
+                                }
+                                closePanel();
+                            }
+
+                            popoutObj = new THREE.CSS3DObject( ele );
+                            popoutObj.position.x = currentGroup.position.x;
+                            popoutObj.position.y = currentGroup.position.y - 2000;
+                            popoutObj.position.z = currentGroup.position.z + posiZ;
+                            scene.add(popoutObj);
+                            singleTransform(popoutObj);
+                            objs[i].element.style.display = 'none';
+                        }
+                    }
+                }else{
+                    angleSpeed2 = 0;
+                    angleSpeed3 = 0;
+                    angleSpeed4 = 0;
+                    selectedPlanet = true;
+                    var zoomTo = {'x':0, 'y':3000, 'z':10000};
+                    switch(idx){
+                        case 1:
+                            planetIdx = 1;
+                            zoomTo = {'x':0, 'y':0, 'z':2000};
+                            break;
+                        case 2:
+                            planetIdx = 2;
+                            zoomTo = {'x':group2.position.x, 'y': 0, 'z':group2.position.z+1200};
+                            break;
+                        case 3:
+                            planetIdx = 3;
+                            zoomTo = {'x':group3.position.x, 'y': 0, 'z':group3.position.z+1200};
+                            break;
+                        case 4: 
+                            planetIdx = 4;
+                            zoomTo = {'x':group4.position.x, 'y': 0, 'z':group4.position.z+1200};
+                            break;
+                    }
+                    zoomin(zoomTo);
+                }
+                
+            }
+
+            var symbol = document.createElement( 'img' );
+            symbol.className = 'symbol';
+            symbol.src = 'img/scene'+idx+'/'+data[ i ];
+            element.appendChild( symbol );
+
+            var object = new THREE.CSS3DObject( element );
+            object.position.x = Math.random() * 4000 - 2000;
+            object.position.y = Math.random() * 4000 - 2000;
+            object.position.z = Math.random() * 4000 - 2000;
+            
+            g.add(object);
+            objs.push( object );
+
+            var phi = Math.acos( -1 + ( 2 * i ) / data.length );
+            var theta = Math.sqrt( data.length * Math.PI ) * phi;
+            var object = new THREE.Object3D();
+            spherical.set( r, phi, theta );
+            object.position.setFromSpherical( spherical );
+            vector.copy( object.position ).multiplyScalar( 2 );
+            object.lookAt( vector );
+            container.push( object );
+
+
+
+            var element2 = document.createElement( 'div' );
+            element2.id = 'element'+(i+1);
+            element2.className = 'element';
+            element2.style.backgroundColor = 'rgba(0,127,127,' + ( Math.random() * 0.5 + 0.25 ) + ')';
+            element2.onclick = function(){
+                if(zoomed){
+                    var currentGroup = group;
+                    var imgHeight = 560;
+                    var posiZ = 840;
+                    switch(planetIdx){
+                        case 2:
+                            currentGroup = group2;
+                            imgHeight = 340;
+                            posiZ = 440;
+                            break;
+                        case 3:
+                            currentGroup = group3;
+                            imgHeight = 340;
+                            posiZ = 440;
+                            break;
+                        case 4:
+                            currentGroup = group4;  
+                            imgHeight = 340;
+                            posiZ = 440;
+                            break;
+                    }
+                    for(var i = 0, len = objs.length; i < len; i++){
+                        if(this.id === objs[i].element.id){
+                            var ele = document.createElement( 'div' );
+                            ele.className = 'element2';
+
+                            var symbol = document.createElement( 'img' );
+                            symbol.className = 'symbol';
+                            symbol.src = 'img/scene'+idx+'/'+data[ i+1 ];
+                            symbol.style.height = imgHeight + 'px';
+                            ele.appendChild( symbol );
+
+                            var symbol2 = document.createElement( 'img' );
+                            symbol2.className = 'symbol';
+                            symbol2.src = 'img/scene'+idx+'/'+data[ i ];
+                            symbol2.style.height = imgHeight + 'px';
+                            ele.appendChild( symbol2 );
+
+                            var close = document.createElement( 'div' );
+                            close.className = 'closeButton';
+                            close.textContent = 'X';
+                            ele.appendChild( close );
+
+                            close.onclick = function(i){
+                                for(let j = 0, len2 = objs.length; j < len2; j++){
+                                    objs[j].element.style.display = 'block';    
+                                }
+                                closePanel();
+                            }
+
+                            popoutObj = new THREE.CSS3DObject( ele );
+                            popoutObj.position.x = currentGroup.position.x;
+                            popoutObj.position.y = currentGroup.position.y - 2000;
+                            popoutObj.position.z = currentGroup.position.z + posiZ;
+                            scene.add(popoutObj);
+                            singleTransform(popoutObj);
+                            objs[i].element.style.display = 'none';
+                        }
+                    }
+                }else{
+                    angleSpeed2 = 0;
+                    angleSpeed3 = 0;
+                    angleSpeed4 = 0;
+                    selectedPlanet = true;
+                    var zoomTo = {'x':0, 'y':3000, 'z':10000};
+                    switch(idx){
+                        case 1:
+                            planetIdx = 1;
+                            zoomTo = {'x':0, 'y':0, 'z':2000};
+                            break;
+                        case 2:
+                            planetIdx = 2;
+                            zoomTo = {'x':group2.position.x, 'y': 0, 'z':group2.position.z+1200};
+                            break;
+                        case 3:
+                            planetIdx = 3;
+                            zoomTo = {'x':group3.position.x, 'y': 0, 'z':group3.position.z+1200};
+                            break;
+                        case 4: 
+                            planetIdx = 4;
+                            zoomTo = {'x':group4.position.x, 'y': 0, 'z':group4.position.z+1200};
+                            break;
+                    }
+                    zoomin(zoomTo);
+                }
+                
+            }
+
+            var symbol2 = document.createElement( 'img' );
+            symbol2.className = 'symbol';
+            symbol2.src = 'img/scene'+idx+'/'+data[ i+1 ];
+            element2.appendChild( symbol2 );
+
+            var object2 = new THREE.CSS3DObject( element2 );
+            object2.position.x = Math.random() * 4000 - 2000;
+            object2.position.y = Math.random() * 4000 - 2000;
+            object2.position.z = Math.random() * 4000 - 2000;
+            
+            g.add(object2);
+            objs.push( object2 );
+
+            var phi2 = Math.acos( -1 + ( 2 * (i+1) ) / data.length );
+            var theta2 = Math.sqrt( data.length * Math.PI ) * phi2;
+            var object2 = new THREE.Object3D();
+            spherical.set( r, phi2, theta2 );
+            object2.position.setFromSpherical( spherical );
+            vector.copy( object2.position ).multiplyScalar( 2 );
+            object2.lookAt( vector );
+            container.push( object2 );
+        }
+        scene.add(g);
+    }
+
+    function zoomin(targetPosi){
+        TWEEN.removeAll();
+        
+        new TWEEN.Tween( camera.position )
+            .to( { x: targetPosi.x, y: targetPosi.y, z: targetPosi.z }, 2000 )
+            .easing( TWEEN.Easing.Exponential.InOut )
+            .start();
+
+        new TWEEN.Tween( camera.rotation )
+            .to( { x: 0, y: 0, z: 0 }, 2000 )
+            .easing( TWEEN.Easing.Exponential.InOut )
+            .start();
+
+        new TWEEN.Tween( this )
+            .to( {}, 2000 * 2 )
+            .onUpdate( render )
+            .start();
+    }
+
+    function zoomout(){
+        zoomed = false;
+        selectedPlanet = false;
+        planetIdx = 1;
+        angleSpeed2 = 0.003;
+        angleSpeed3 = 0.002;
+        angleSpeed4 = 0.001;
+        TWEEN.removeAll();
+        
+        new TWEEN.Tween( camera.position )
+            .to( { x: 0, y: 3000, z: 10000 }, 2000 )
+            .easing( TWEEN.Easing.Exponential.InOut )
+            .start();
+
+        new TWEEN.Tween( camera.rotation )
+            .to( { x: 0, y: 0, z: 0 }, 2000 )
+            .easing( TWEEN.Easing.Exponential.InOut )
+            .start();
+
+        new TWEEN.Tween( this )
+            .to( {}, 2000 * 2 )
+            .onUpdate( render )
+            .start();
+    }
+
+    function closePanel(){
+        TWEEN.removeAll();
+        
+        new TWEEN.Tween( popoutObj.position )
+            .to( { x: popoutObj.position.x, y: popoutObj.position.y + 20000, z: popoutObj.position.x }, 2000 )
+            .easing( TWEEN.Easing.Exponential.InOut )
+            .start();
+
+        new TWEEN.Tween( this )
+            .to( {}, 2000 * 2 )
+            .onUpdate( render )
+            .onComplete(function(){
+                scene.remove(popoutObj);
+            })
+            .start();
+    }
+
+    function singleTransform(object){
+        TWEEN.removeAll();
+
+        new TWEEN.Tween( object.position )
+            .to( { x: object.position.x, y: object.position.y+2000, z: object.position.z }, 1000 )
+            .easing( TWEEN.Easing.Exponential.InOut )
+            .start();
+
+        new TWEEN.Tween( this )
+            .to( {}, 1000 )
+            .onUpdate( render )
+            .start();
+    }
+
+
+
+    function transform( duration ) {
+
+        TWEEN.removeAll();
+
+        for ( var i = 0; i < objects.length; i++ ) {
+            var object = objects[ i ];
+            var target = targets.sphere[ i ];
+
+            new TWEEN.Tween( object.position )
+                .to( { x: target.position.x , y: target.position.y, z: target.position.z }, Math.random() * duration + duration )
+                .easing( TWEEN.Easing.Exponential.InOut )
+                .start();
+
+            new TWEEN.Tween( object.rotation )
+                .to( { x: target.rotation.x, y: target.rotation.y, z: target.rotation.z }, Math.random() * duration + duration )
+                .easing( TWEEN.Easing.Exponential.InOut )
+                .start();
+        }
+
+        for ( var i = 0; i < objects2.length; i++ ) {
+            var object = objects2[ i ];
+            var target = targets.sphere2[ i ];
+
+            new TWEEN.Tween( object.position )
+                .to( { x: target.position.x , y: target.position.y, z: target.position.z }, Math.random() * duration + duration )
+                .easing( TWEEN.Easing.Exponential.InOut )
+                .start();
+
+            new TWEEN.Tween( object.rotation )
+                .to( { x: target.rotation.x, y: target.rotation.y, z: target.rotation.z }, Math.random() * duration + duration )
+                .easing( TWEEN.Easing.Exponential.InOut )
+                .start();
+        }
+
+        for ( var i = 0; i < objects3.length; i++ ) {
+            var object = objects3[ i ];
+            var target = targets.sphere3[ i ];
+
+            new TWEEN.Tween( object.position )
+                .to( { x: target.position.x , y: target.position.y, z: target.position.z }, Math.random() * duration + duration )
+                .easing( TWEEN.Easing.Exponential.InOut )
+                .start();
+
+            new TWEEN.Tween( object.rotation )
+                .to( { x: target.rotation.x, y: target.rotation.y, z: target.rotation.z }, Math.random() * duration + duration )
+                .easing( TWEEN.Easing.Exponential.InOut )
+                .start();
+        }
+
+        for ( var i = 0; i < objects4.length; i++ ) {
+            var object = objects4[ i ];
+            var target = targets.sphere4[ i ];
+
+            new TWEEN.Tween( object.position )
+                .to( { x: target.position.x , y: target.position.y, z: target.position.z }, Math.random() * duration + duration )
+                .easing( TWEEN.Easing.Exponential.InOut )
+                .start();
+
+            new TWEEN.Tween( object.rotation )
+                .to( { x: target.rotation.x, y: target.rotation.y, z: target.rotation.z }, Math.random() * duration + duration )
+                .easing( TWEEN.Easing.Exponential.InOut )
+                .start();
+        }
+
+        new TWEEN.Tween( this )
+            .to( {}, duration * 2 )
+            .onUpdate( render )
+            .start();
+
+    }
+
+    function onWindowResize() {
+
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+
+        renderer.setSize( window.innerWidth, window.innerHeight );
+
+        render();
+
+    }
+
+    function animate() {
+        render();
+        requestAnimationFrame( animate );
+        TWEEN.update();
+    }
+
+    var angle2 = 0;
+    var angle3 = 0;
+    var angle4 = 0;
+    var angleSpeed2 = 0.003;
+    var angleSpeed3 = 0.002;
+    var angleSpeed4 = 0.001;
+    var cameraSpeed = {'x':0, 'y':0, 'z':0};
+    var zoomTo = {'x':0, 'y':0, 'z':0};
+    function render() {
+        group.rotation.y += 0.002;
+        group2.rotation.y += 0.003;
+        group3.rotation.y += 0.003;
+        group4.rotation.y += 0.003;
+
+        group2.position.x = 1600*Math.cos(angle2);
+        group2.position.z = 1600*Math.sin(angle2);
+        angle2 += angleSpeed2;
+
+        group3.position.x = 2800*Math.cos(angle3);
+        group3.position.z = 2800*Math.sin(angle3);
+        angle3 += angleSpeed3;
+
+        group4.position.x = 4000*Math.cos(angle4);
+        group4.position.z = 4000*Math.sin(angle4);
+        angle4 += angleSpeed4;
+
+        var step = 8;
+        var flagX = false, flagY = false, flagZ = false;
+        if(!zoomed){
+            switch(planetIdx){
+                case 1:
+                    if(Math.abs(tmpVec.x-group.position.x) < step){
+                        tmpVec.x = group.position.x;
+                        flagX = true;
+                    }else{
+                        tmpVec.x += group.position.x >= tmpVec.x ? step : -step;
+                    }
+                    if(Math.abs(tmpVec.y-group.position.y) < step){
+                        tmpVec.y = group.position.y;
+                        flagY = true;
+                    }else{
+                        tmpVec.y += group.position.y >= tmpVec.y ? step : -step;
+                    }
+                    if(Math.abs(tmpVec.z-group.position.z) < step){
+                        tmpVec.z = group.position.z;
+                        flagZ = true;
+                    }else{
+                        tmpVec.z += group.position.z >= tmpVec.z ? step : -step;
+                    }
+                    break;
+                case 2:
+                    if(Math.abs(tmpVec.x-group2.position.x) < step){
+                        tmpVec.x = group2.position.x;
+                        flagX = true;
+                    }else{
+                        tmpVec.x += group2.position.x >= tmpVec.x ? step : -step;
+                    }
+                    if(Math.abs(tmpVec.y-group2.position.y) < step){
+                        tmpVec.y = group2.position.y;
+                        flagY = true;
+                    }else{
+                        tmpVec.y += group2.position.y >= tmpVec.y ? step : -step;
+                    }
+                    if(Math.abs(tmpVec.z-group2.position.z) < step){
+                        tmpVec.z = group2.position.z;
+                        flagZ = true;
+                    }else{
+                        tmpVec.z += group2.position.z >= tmpVec.z ? step : -step;
+                    }
+                    break;
+                case 3:
+                    if(Math.abs(tmpVec.x-group3.position.x) < step){
+                        tmpVec.x = group3.position.x;
+                        flagX = true;
+                    }else{
+                        tmpVec.x += group3.position.x >= tmpVec.x ? step : -step;
+                    }
+                    if(Math.abs(tmpVec.y-group3.position.y) < step){
+                        tmpVec.y = group3.position.y;
+                        flagY = true;
+                    }else{
+                        tmpVec.y += group3.position.y >= tmpVec.y ? step : -step;
+                    }
+                    if(Math.abs(tmpVec.z-group3.position.z) < step){
+                        tmpVec.z = group3.position.z;
+                        flagZ = true;
+                    }else{
+                        tmpVec.z += group3.position.z >= tmpVec.z ? step : -step;
+                    }
+                    break;
+                case 4:
+                    if(Math.abs(tmpVec.x-group4.position.x) < step){
+                        tmpVec.x = group4.position.x;
+                        flagX = true;
+                    }else{
+                        tmpVec.x += group4.position.x >= tmpVec.x ? step : -step;
+                    }
+                    if(Math.abs(tmpVec.y-group4.position.y) < step){
+                        tmpVec.y = group4.position.y;
+                        flagY = true;
+                    }else{
+                        tmpVec.y += group4.position.y >= tmpVec.y ? step : -step;
+                    }
+                    if(Math.abs(tmpVec.z-group4.position.z) < step){
+                        tmpVec.z = group4.position.z;
+                        flagZ = true;
+                    }else{
+                        tmpVec.z += group4.position.z >= tmpVec.z ? step : -step;
+                    }
+                    break;
+            }
+           
+            camera.lookAt(tmpVec);
+            if(flagX && flagY && flagZ && selectedPlanet){
+                zoomed = true;
+            }
+        }else if(zoomed){
+            camera.lookAt(tmpVec);
+        }
+
+        renderer.render( scene, camera );
+
+    }
+
+</script>
+
+
+</body></html>
