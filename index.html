@@ -59,6 +59,10 @@ document.write(password());
 
 <script type="text/javascript" src="js/slider.js"></script>
 <script>
+    
+
+
+
 
     //setup background
     var scene = document.getElementById('scene');
@@ -92,71 +96,185 @@ document.write(password());
         });
     }
     var speed = 400;
-    $(document).ready(function () {
-        $('#slider').on('change', function () {
-            $('.speck').remove();
-            for (var i = 1; i < 4; i++) {
-                speed = 201 - this.value;
-                $('#range').text('1000px / ' + speed / 10 + 's');
-                speed = speed * (i / 1.25);
-                $('#img-' + i).css({
-                    'animation-duration': speed + 's',
-                    'animation-name': 'float'
-                });
-            }
-        });
-    });
+    // $(document).ready(function () {
+    //     $('#slider').on('change', function () {
+    //         $('.speck').remove();
+    //         for (var i = 1; i < 4; i++) {
+    //             speed = 201 - this.value;
+    //             $('#range').text('1000px / ' + speed / 10 + 's');
+    //             speed = speed * (i / 1.25);
+    //             $('#img-' + i).css({
+    //                 'animation-duration': speed + 's',
+    //                 'animation-name': 'float'
+    //             });
+    //         }
+    //     });
+    // });
 
     var table = [
-        'a11.png','a12.png',
-        'a21.png','a22.png',
-        'a31.png','a32.png',
-        'a41.png','a42.png',
-        'a51.png','a52.png',
-        'a61.png','a62.png',
-        'a71.png','a72.png',
-        'a81.png','a82.png'
+        'img/scene1/a11.png','img/scene1/a12.png',
+        'img/scene1/a21.png','img/scene1/a22.png',
+        'img/scene1/a31.png','img/scene1/a32.png',
+        'img/scene1/a41.png','img/scene1/a42.png',
+        'img/scene1/a51.png','img/scene1/a52.png',
+        'img/scene1/a61.png','img/scene1/a62.png',
+        'img/scene1/a71.png','img/scene1/a72.png',
+        'img/scene1/a81.png','img/scene1/a82.png',
+        'img/scene1/b11.png','img/scene1/b12.png',
+        'img/scene1/b21.png','img/scene1/b22.png',
+        'img/scene1/b31.png','img/scene1/b32.png',
+        'img/scene1/b41.png','img/scene1/b42.png',
+        'img/scene1/b51.png','img/scene1/b52.png',
+        'img/scene1/b61.png','img/scene1/b62.png',
+        'img/scene1/b71.png','img/scene1/b72.png',
+        'img/scene1/b81.png','img/scene1/b82.png',
+        'img/scene1/c11.png','img/scene1/c12.png',
+        'img/scene1/c21.png','img/scene1/c22.png',
+        'img/scene1/c31.png','img/scene1/c32.png',
+        'img/scene1/c41.png','img/scene1/c42.png',
+        'img/scene1/c51.png','img/scene1/c52.png',
+        'img/scene1/c61.png','img/scene1/c62.png',
+        'img/scene1/c71.png','img/scene1/c72.png',
+        'img/scene1/c81.png','img/scene1/c82.png',
+        'img/scene1/d11.png','img/scene1/d12.png',
+        'img/scene1/d21.png','img/scene1/d22.png',
+        'img/scene1/d31.png','img/scene1/d32.png',
+        'img/scene1/d41.png','img/scene1/d42.png',
+        'img/scene1/d51.png','img/scene1/d52.png',
+        'img/scene1/d61.png','img/scene1/d62.png',
+        'img/scene1/d71.png','img/scene1/d72.png',
+        'img/scene1/d81.png','img/scene1/d82.png',
+        'img/scene1/e11.png','img/scene1/e12.png',
+        'img/scene1/e21.png','img/scene1/e22.png',
+        'img/scene1/e31.png','img/scene1/e32.png',
+        'img/scene1/e41.png','img/scene1/e42.png',
+        'img/scene1/e51.png','img/scene1/e52.png',
+        'img/scene1/e61.png','img/scene1/e62.png',
+        'img/scene1/e71.png','img/scene1/e72.png',
+        'img/scene1/e81.png','img/scene1/e82.png',
+        'img/scene1/f11.png','img/scene1/f12.png',
+        'img/scene1/f21.png','img/scene1/f22.png',
+        'img/scene1/f31.png','img/scene1/f32.png',
+        'img/scene1/f41.png','img/scene1/f42.png',
+        'img/scene1/f51.png','img/scene1/f52.png',
+        'img/scene1/f61.png','img/scene1/f62.png',
+        'img/scene1/f71.png','img/scene1/f72.png',
+        'img/scene1/f81.png','img/scene1/f82.png'
     ];
 
     var table2 = [
-        'a11.png','a12.png',
-        'a21.png','a22.png',
-        'a31.png','a32.png',
-        'a41.png','a42.png',
-        'a51.png','a52.png',
-        'a61.png','a62.png',
-        'a71.png','a72.png',
-        'a81.png','a82.png'
+        'img/scene2/a11.png','img/scene2/a12.png',
+        'img/scene2/a21.png','img/scene2/a22.png',
+        'img/scene2/a31.png','img/scene2/a32.png',
+        'img/scene2/a41.png','img/scene2/a42.png',
+        'img/scene2/a51.png','img/scene2/a52.png',
+        'img/scene2/a61.png','img/scene2/a62.png',
+        'img/scene2/a71.png','img/scene2/a72.png',
+        'img/scene2/a81.png','img/scene2/a82.png'
     ];
 
     var table3 = [
-        'a11.png','a12.png',
-        'a21.png','a22.png',
-        'a31.png','a32.png',
-        'a41.png','a42.png',
-        'a51.png','a52.png',
-        'a61.png','a62.png',
-        'a71.png','a72.png',
-        'a81.png','a82.png'
+        'img/scene3/b11.png','img/scene3/b12.png',
+        'img/scene3/b21.png','img/scene3/b22.png',
+        'img/scene3/b31.png','img/scene3/b32.png',
+        'img/scene3/b41.png','img/scene3/b42.png',
+        'img/scene3/b51.png','img/scene3/b52.png',
+        'img/scene3/b61.png','img/scene3/b62.png',
+        'img/scene3/b71.png','img/scene3/b72.png',
+        'img/scene3/b81.png','img/scene3/b82.png'
     ];
 
     var table4 = [
-        'a11.png','a12.png',
-        'a21.png','a22.png',
-        'a31.png','a32.png',
-        'a41.png','a42.png',
-        'a51.png','a52.png',
-        'a61.png','a62.png',
-        'a71.png','a72.png',
-        'a81.png','a82.png'
+        'img/scene4/c11.png','img/scene4/c12.png',
+        'img/scene4/c21.png','img/scene4/c22.png',
+        'img/scene4/c31.png','img/scene4/c32.png',
+        'img/scene4/c41.png','img/scene4/c42.png',
+        'img/scene4/c51.png','img/scene4/c52.png',
+        'img/scene4/c61.png','img/scene4/c62.png',
+        'img/scene4/c71.png','img/scene4/c72.png',
+        'img/scene4/c81.png','img/scene4/c82.png'
     ];
+
+    var table5 = [
+        'img/scene5/d11.png','img/scene5/d12.png',
+        'img/scene5/d21.png','img/scene5/d22.png',
+        'img/scene5/d31.png','img/scene5/d32.png',
+        'img/scene5/d41.png','img/scene5/d42.png',
+        'img/scene5/d51.png','img/scene5/d52.png',
+        'img/scene5/d61.png','img/scene5/d62.png',
+        'img/scene5/d71.png','img/scene5/d72.png',
+        'img/scene5/d81.png','img/scene5/d82.png'
+    ];
+
+    var table6 = [
+        'img/scene6/e11.png','img/scene6/e12.png',
+        'img/scene6/e21.png','img/scene6/e22.png',
+        'img/scene6/e31.png','img/scene6/e32.png',
+        'img/scene6/e41.png','img/scene6/e42.png',
+        'img/scene6/e51.png','img/scene6/e52.png',
+        'img/scene6/e61.png','img/scene6/e62.png',
+        'img/scene6/e71.png','img/scene6/e72.png',
+        'img/scene6/e81.png','img/scene6/e82.png'
+    ];
+
+    var table7 = [
+        'img/scene7/f11.png','img/scene7/f12.png',
+        'img/scene7/f21.png','img/scene7/f22.png',
+        'img/scene7/f31.png','img/scene7/f32.png',
+        'img/scene7/f41.png','img/scene7/f42.png',
+        'img/scene7/f51.png','img/scene7/f52.png',
+        'img/scene7/f61.png','img/scene7/f62.png',
+        'img/scene7/f71.png','img/scene7/f72.png',
+        'img/scene7/f81.png','img/scene7/f82.png'
+    ];
+
+    function preloadImg(list,imgs) {
+        console.log('preloading images');
+        var def = $.Deferred(),
+            len = list.length;
+        $(list).each(function(i,e) {
+            var img = new Image();
+            img.src = e;
+            if(img.complete) {
+                imgs[i] = img;
+                len--;
+                if(len == 0) {
+                    def.resolve();
+                }
+            }
+            else {
+                img.onload = (function(j) {
+                    return function() {
+                        imgs[j] = img
+                        len--;
+                        if(len == 0) {
+                            def.resolve();
+                        }
+                    };
+                })(i);
+                img.onerror = function() {
+                    len--;
+                    console.log('fail to load image');
+                };
+            }
+        });
+        return def.promise();
+    }
+    var imgs1 = [], imgs2 = [], imgs3 = [], imgs4 = [], imgs5 = [], imgs6 = [], imgs7 = [];
+    preloadImg(table, imgs1);
+    preloadImg(table2, imgs2);
+    preloadImg(table3, imgs3);
+    preloadImg(table4, imgs4);
+    preloadImg(table5, imgs5);
+    preloadImg(table6, imgs6);
+    preloadImg(table7, imgs7);
 
 
     var camera, scene, renderer;
     var popoutObj;
 
-    var objects = [], objects2 = [], objects3 = [], objects4 = [], group, group2, group3, group4;
-    var targets = { sphere: [], sphere2: [], sphere3: [], sphere4: []};
+    var objects = [], objects2 = [], objects3 = [], objects4 = [], objects5 = [], objects6 = [], objects7 = [], group, group2, group3, group4, group5, group6, group7;
+    var targets = { sphere: [], sphere2: [], sphere3: [], sphere4: [], sphere5: [], sphere6: [], sphere7: []};
     var zoomed = false;
     var selectedPlanet = false;
     var planetIdx = 0;
@@ -174,12 +292,24 @@ document.write(password());
         group2.rotation.set(0, 0, 0);   
 
         group3 = new THREE.Group();
-        group3.position.set(2800, 0, 0);
+        group3.position.set(2600, 0, 0);
         group3.rotation.set(0, 0, 0);   
 
         group4 = new THREE.Group();
-        group4.position.set(4000, 0, 0);
-        group4.rotation.set(0, 0, 0);        
+        group4.position.set(3600, 0, 0);
+        group4.rotation.set(0, 0, 0); 
+
+        group5 = new THREE.Group();
+        group5.position.set(4600, 0, 0);
+        group5.rotation.set(0, 0, 0); 
+
+        group6 = new THREE.Group();
+        group6.position.set(5600, 0, 0);
+        group6.rotation.set(0, 0, 0); 
+
+        group7 = new THREE.Group();
+        group7.position.set(6600, 0, 0);
+        group7.rotation.set(0, 0, 0);        
 
         camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
         camera.position.y = 3000;
@@ -192,10 +322,20 @@ document.write(password());
         tmpVec.z = 0;
 
         // sphere
-        createSphere(1, table, targets.sphere, objects, group, 800);
-        createSphere(2, table2, targets.sphere2, objects2, group2, 400);
-        createSphere(3, table3, targets.sphere3, objects3, group3, 400);
-        createSphere(4, table4, targets.sphere4, objects4, group4, 400);
+        // createSphere(1, table, targets.sphere, objects, group, 800);
+        // createSphere(2, table2, targets.sphere2, objects2, group2, 400);
+        // createSphere(3, table3, targets.sphere3, objects3, group3, 400);
+        // createSphere(4, table4, targets.sphere4, objects4, group4, 400);
+        // createSphere(5, table5, targets.sphere5, objects5, group5, 400);
+        // createSphere(6, table6, targets.sphere6, objects6, group6, 400);
+        // createSphere(7, table7, targets.sphere7, objects7, group7, 400);
+        createSphere(1, imgs1, targets.sphere, objects, group, 800);
+        createSphere(2, imgs2, targets.sphere2, objects2, group2, 400);
+        createSphere(3, imgs3, targets.sphere3, objects3, group3, 400);
+        createSphere(4, imgs4, targets.sphere4, objects4, group4, 400);
+        createSphere(5, imgs5, targets.sphere5, objects5, group5, 400);
+        createSphere(6, imgs6, targets.sphere6, objects6, group6, 400);
+        createSphere(7, imgs7, targets.sphere7, objects7, group7, 400);
 
         renderer = new THREE.CSS3DRenderer();
         renderer.setSize( window.innerWidth, window.innerHeight );
@@ -237,23 +377,46 @@ document.write(password());
                             imgHeight = 340;
                             posiZ = 440;
                             break;
+                        case 5:
+                            currentGroup = group5;  
+                            imgHeight = 340;
+                            posiZ = 440;
+                            break;
+                        case 6:
+                            currentGroup = group6;  
+                            imgHeight = 340;
+                            posiZ = 440;
+                            break;
+                        case 7:
+                            currentGroup = group7;  
+                            imgHeight = 340;
+                            posiZ = 440;
+                            break;
                     }
                     for(var i = 0, len = objs.length; i < len; i++){
                         if(this.id === objs[i].element.id){
                             var ele = document.createElement( 'div' );
                             ele.className = 'element2';
 
-                            var symbol = document.createElement( 'img' );
-                            symbol.className = 'symbol';
-                            symbol.src = 'img/scene'+idx+'/'+data[ i+1 ];
-                            symbol.style.height = imgHeight + 'px';
-                            ele.appendChild( symbol );
+                            // var symbol = document.createElement( 'img' );
+                            // symbol.className = 'symbol';
+                            // symbol.src = 'img/scene'+idx+'/'+data[ i+1 ];
+                            // symbol.style.height = imgHeight + 'px';
+                            var tmpImg1 = new Image();
+                            tmpImg1.src = data[ i+1 ].src;
+                            tmpImg1.className = 'symbol';
+                            tmpImg1.style.height = imgHeight + 'px';
+                            ele.appendChild( tmpImg1 );
 
-                            var symbol2 = document.createElement( 'img' );
-                            symbol2.className = 'symbol';
-                            symbol2.src = 'img/scene'+idx+'/'+data[ i ];
-                            symbol2.style.height = imgHeight + 'px';
-                            ele.appendChild( symbol2 );
+                            // var symbol2 = document.createElement( 'img' );
+                            // symbol2.className = 'symbol';
+                            // symbol2.src = 'img/scene'+idx+'/'+data[ i ];
+                            // symbol2.style.height = imgHeight + 'px';
+                            var tmpImg2 = new Image();
+                            tmpImg2.src = data[ i ].src;
+                            tmpImg2.className = 'symbol';
+                            tmpImg2.style.height = imgHeight + 'px';
+                            ele.appendChild( tmpImg2 );
 
                             var close = document.createElement( 'div' );
                             close.className = 'closeButton';
@@ -299,16 +462,29 @@ document.write(password());
                             planetIdx = 4;
                             zoomTo = {'x':group4.position.x, 'y': 0, 'z':group4.position.z+1200};
                             break;
+                        case 5: 
+                            planetIdx = 5;
+                            zoomTo = {'x':group5.position.x, 'y': 0, 'z':group5.position.z+1200};
+                            break;
+                        case 6: 
+                            planetIdx = 6;
+                            zoomTo = {'x':group6.position.x, 'y': 0, 'z':group6.position.z+1200};
+                            break;
+                        case 7: 
+                            planetIdx = 7;
+                            zoomTo = {'x':group7.position.x, 'y': 0, 'z':group7.position.z+1200};
+                            break;
                     }
                     zoomin(zoomTo);
                 }
                 
             }
 
-            var symbol = document.createElement( 'img' );
-            symbol.className = 'symbol';
-            symbol.src = 'img/scene'+idx+'/'+data[ i ];
-            element.appendChild( symbol );
+            // var symbol = document.createElement( 'img' );
+            // symbol.className = 'symbol';
+            // symbol.src = 'img/scene'+idx+'/'+data[ i ];
+            data[ i ].className = 'symbol';
+            element.appendChild( data[ i ] );
 
             var object = new THREE.CSS3DObject( element );
             object.position.x = Math.random() * 4000 - 2000;
@@ -354,23 +530,46 @@ document.write(password());
                             imgHeight = 340;
                             posiZ = 440;
                             break;
+                        case 5:
+                            currentGroup = group5;  
+                            imgHeight = 340;
+                            posiZ = 440;
+                            break;
+                        case 6:
+                            currentGroup = group6;  
+                            imgHeight = 340;
+                            posiZ = 440;
+                            break;
+                        case 7:
+                            currentGroup = group7;  
+                            imgHeight = 340;
+                            posiZ = 440;
+                            break;
                     }
                     for(var i = 0, len = objs.length; i < len; i++){
                         if(this.id === objs[i].element.id){
                             var ele = document.createElement( 'div' );
                             ele.className = 'element2';
 
-                            var symbol = document.createElement( 'img' );
-                            symbol.className = 'symbol';
-                            symbol.src = 'img/scene'+idx+'/'+data[ i+1 ];
-                            symbol.style.height = imgHeight + 'px';
-                            ele.appendChild( symbol );
+                            // var symbol = document.createElement( 'img' );
+                            // symbol.className = 'symbol';
+                            // symbol.src = 'img/scene'+idx+'/'+data[ i+1 ];
+                            // symbol.style.height = imgHeight + 'px';
+                            var tmpImg1 = new Image();
+                            tmpImg1.src = data[ i+1 ].src;
+                            tmpImg1.className = 'symbol';
+                            tmpImg1.style.height = imgHeight + 'px';
+                            ele.appendChild( tmpImg1 );
 
-                            var symbol2 = document.createElement( 'img' );
-                            symbol2.className = 'symbol';
-                            symbol2.src = 'img/scene'+idx+'/'+data[ i ];
-                            symbol2.style.height = imgHeight + 'px';
-                            ele.appendChild( symbol2 );
+                            // var symbol2 = document.createElement( 'img' );
+                            // symbol2.className = 'symbol';
+                            // symbol2.src = 'img/scene'+idx+'/'+data[ i ];
+                            // symbol2.style.height = imgHeight + 'px';
+                            var tmpImg2 = new Image();
+                            tmpImg2.src = data[ i ].src;
+                            tmpImg2.className = 'symbol';
+                            tmpImg2.style.height = imgHeight + 'px';
+                            ele.appendChild( tmpImg2 );
 
                             var close = document.createElement( 'div' );
                             close.className = 'closeButton';
@@ -397,6 +596,9 @@ document.write(password());
                     angleSpeed2 = 0;
                     angleSpeed3 = 0;
                     angleSpeed4 = 0;
+                    angleSpeed5 = 0;
+                    angleSpeed6 = 0;
+                    angleSpeed7 = 0;
                     selectedPlanet = true;
                     var zoomTo = {'x':0, 'y':3000, 'z':10000};
                     switch(idx){
@@ -416,16 +618,29 @@ document.write(password());
                             planetIdx = 4;
                             zoomTo = {'x':group4.position.x, 'y': 0, 'z':group4.position.z+1200};
                             break;
+                        case 5: 
+                            planetIdx = 5;
+                            zoomTo = {'x':group5.position.x, 'y': 0, 'z':group5.position.z+1200};
+                            break;
+                        case 6: 
+                            planetIdx = 6;
+                            zoomTo = {'x':group6.position.x, 'y': 0, 'z':group6.position.z+1200};
+                            break;
+                        case 7: 
+                            planetIdx = 7;
+                            zoomTo = {'x':group7.position.x, 'y': 0, 'z':group7.position.z+1200};
+                            break;
                     }
                     zoomin(zoomTo);
                 }
                 
             }
 
-            var symbol2 = document.createElement( 'img' );
-            symbol2.className = 'symbol';
-            symbol2.src = 'img/scene'+idx+'/'+data[ i+1 ];
-            element2.appendChild( symbol2 );
+            // var symbol2 = document.createElement( 'img' );
+            // symbol2.className = 'symbol';
+            // symbol2.src = 'img/scene'+idx+'/'+data[ i+1 ];
+            data[ i+1 ].className = 'symbol';
+            element2.appendChild( data[ i+1 ] );
 
             var object2 = new THREE.CSS3DObject( element2 );
             object2.position.x = Math.random() * 4000 - 2000;
@@ -588,6 +803,51 @@ document.write(password());
                 .start();
         }
 
+        for ( var i = 0; i < objects5.length; i++ ) {
+            var object = objects5[ i ];
+            var target = targets.sphere5[ i ];
+
+            new TWEEN.Tween( object.position )
+                .to( { x: target.position.x , y: target.position.y, z: target.position.z }, Math.random() * duration + duration )
+                .easing( TWEEN.Easing.Exponential.InOut )
+                .start();
+
+            new TWEEN.Tween( object.rotation )
+                .to( { x: target.rotation.x, y: target.rotation.y, z: target.rotation.z }, Math.random() * duration + duration )
+                .easing( TWEEN.Easing.Exponential.InOut )
+                .start();
+        }
+
+        for ( var i = 0; i < objects6.length; i++ ) {
+            var object = objects6[ i ];
+            var target = targets.sphere6[ i ];
+
+            new TWEEN.Tween( object.position )
+                .to( { x: target.position.x , y: target.position.y, z: target.position.z }, Math.random() * duration + duration )
+                .easing( TWEEN.Easing.Exponential.InOut )
+                .start();
+
+            new TWEEN.Tween( object.rotation )
+                .to( { x: target.rotation.x, y: target.rotation.y, z: target.rotation.z }, Math.random() * duration + duration )
+                .easing( TWEEN.Easing.Exponential.InOut )
+                .start();
+        }
+
+        for ( var i = 0; i < objects7.length; i++ ) {
+            var object = objects7[ i ];
+            var target = targets.sphere7[ i ];
+
+            new TWEEN.Tween( object.position )
+                .to( { x: target.position.x , y: target.position.y, z: target.position.z }, Math.random() * duration + duration )
+                .easing( TWEEN.Easing.Exponential.InOut )
+                .start();
+
+            new TWEEN.Tween( object.rotation )
+                .to( { x: target.rotation.x, y: target.rotation.y, z: target.rotation.z }, Math.random() * duration + duration )
+                .easing( TWEEN.Easing.Exponential.InOut )
+                .start();
+        }
+
         new TWEEN.Tween( this )
             .to( {}, duration * 2 )
             .onUpdate( render )
@@ -615,9 +875,15 @@ document.write(password());
     var angle2 = 0;
     var angle3 = 0;
     var angle4 = 0;
-    var angleSpeed2 = 0.003;
+    var angle5 = 0;
+    var angle6 = 0;
+    var angle7 = 0;
+    var angleSpeed2 = 0.0024;
     var angleSpeed3 = 0.002;
-    var angleSpeed4 = 0.001;
+    var angleSpeed4 = 0.0016;
+    var angleSpeed5 = 0.0012;
+    var angleSpeed6 = 0.0008;
+    var angleSpeed7 = 0.0004;
     var cameraSpeed = {'x':0, 'y':0, 'z':0};
     var zoomTo = {'x':0, 'y':0, 'z':0};
     function render() {
@@ -625,18 +891,33 @@ document.write(password());
         group2.rotation.y += 0.003;
         group3.rotation.y += 0.003;
         group4.rotation.y += 0.003;
+        group5.rotation.y += 0.003;
+        group6.rotation.y += 0.003;
+        group7.rotation.y += 0.003;
 
         group2.position.x = 1600*Math.cos(angle2);
         group2.position.z = 1600*Math.sin(angle2);
         angle2 += angleSpeed2;
 
-        group3.position.x = 2800*Math.cos(angle3);
-        group3.position.z = 2800*Math.sin(angle3);
+        group3.position.x = 2600*Math.cos(angle3);
+        group3.position.z = 2600*Math.sin(angle3);
         angle3 += angleSpeed3;
 
-        group4.position.x = 4000*Math.cos(angle4);
-        group4.position.z = 4000*Math.sin(angle4);
+        group4.position.x = 3600*Math.cos(angle4);
+        group4.position.z = 3600*Math.sin(angle4);
         angle4 += angleSpeed4;
+
+        group5.position.x = 4600*Math.cos(angle5);
+        group5.position.z = 4600*Math.sin(angle5);
+        angle5 += angleSpeed5;
+
+        group6.position.x = 5600*Math.cos(angle6);
+        group6.position.z = 5600*Math.sin(angle6);
+        angle6 += angleSpeed6;
+
+        group7.position.x = 6600*Math.cos(angle7);
+        group7.position.z = 6600*Math.sin(angle7);
+        angle7 += angleSpeed7;
 
         var step = 8;
         var flagX = false, flagY = false, flagZ = false;
@@ -720,6 +1001,66 @@ document.write(password());
                         flagZ = true;
                     }else{
                         tmpVec.z += group4.position.z >= tmpVec.z ? step : -step;
+                    }
+                    break;
+                case 5:
+                    if(Math.abs(tmpVec.x-group5.position.x) < step){
+                        tmpVec.x = group5.position.x;
+                        flagX = true;
+                    }else{
+                        tmpVec.x += group5.position.x >= tmpVec.x ? step : -step;
+                    }
+                    if(Math.abs(tmpVec.y-group5.position.y) < step){
+                        tmpVec.y = group5.position.y;
+                        flagY = true;
+                    }else{
+                        tmpVec.y += group5.position.y >= tmpVec.y ? step : -step;
+                    }
+                    if(Math.abs(tmpVec.z-group5.position.z) < step){
+                        tmpVec.z = group5.position.z;
+                        flagZ = true;
+                    }else{
+                        tmpVec.z += group5.position.z >= tmpVec.z ? step : -step;
+                    }
+                    break;
+                case 6:
+                    if(Math.abs(tmpVec.x-group6.position.x) < step){
+                        tmpVec.x = group6.position.x;
+                        flagX = true;
+                    }else{
+                        tmpVec.x += group6.position.x >= tmpVec.x ? step : -step;
+                    }
+                    if(Math.abs(tmpVec.y-group6.position.y) < step){
+                        tmpVec.y = group6.position.y;
+                        flagY = true;
+                    }else{
+                        tmpVec.y += group6.position.y >= tmpVec.y ? step : -step;
+                    }
+                    if(Math.abs(tmpVec.z-group6.position.z) < step){
+                        tmpVec.z = group6.position.z;
+                        flagZ = true;
+                    }else{
+                        tmpVec.z += group6.position.z >= tmpVec.z ? step : -step;
+                    }
+                    break;
+                case 7:
+                    if(Math.abs(tmpVec.x-group7.position.x) < step){
+                        tmpVec.x = group7.position.x;
+                        flagX = true;
+                    }else{
+                        tmpVec.x += group7.position.x >= tmpVec.x ? step : -step;
+                    }
+                    if(Math.abs(tmpVec.y-group7.position.y) < step){
+                        tmpVec.y = group7.position.y;
+                        flagY = true;
+                    }else{
+                        tmpVec.y += group7.position.y >= tmpVec.y ? step : -step;
+                    }
+                    if(Math.abs(tmpVec.z-group7.position.z) < step){
+                        tmpVec.z = group7.position.z;
+                        flagZ = true;
+                    }else{
+                        tmpVec.z += group7.position.z >= tmpVec.z ? step : -step;
                     }
                     break;
             }
