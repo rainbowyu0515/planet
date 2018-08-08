@@ -382,8 +382,9 @@ document.write(password());
                 console.log("zoomed: " + zoomed + ", ispoping: " + ispoping);
                 if(zoomed){
                     if(!ispoping){
+                        scene.remove(popoutObj);
                         ispoping = true;
-                        $('#zoomOut').prop('onclick', null);
+                        // $('#zoomOut').prop('onclick', null);
                         var currentGroup = group;
                         var imgHeight = 640;
                         var posiZ = 1000;
@@ -544,8 +545,9 @@ document.write(password());
                 console.log("zoomed: " + zoomed + ", ispoping: " + ispoping);
                 if(zoomed){
                     if(!ispoping){
+                        scene.remove(popoutObj);
                         ispoping = true;
-                        $('#zoomOut').prop('onclick', null);
+                        // $('#zoomOut').prop('onclick', null);
                         var currentGroup = group;
                         var imgHeight = 640;
                         var posiZ = 1000;
@@ -804,120 +806,124 @@ document.write(password());
     }
 
     function zoomout(){
-        zoomed = false;
-        selectedPlanet = false;
-        angleSpeed2 = 0.0024;
-        angleSpeed3 = 0.002;
-        angleSpeed4 = 0.0016;
-        angleSpeed5 = 0.0012;
-        angleSpeed6 = 0.0008;
-        angleSpeed7 = 0.0004;
+        if(!ispoping){
+            scene.remove(popoutObj);
+            zoomed = false;
+            selectedPlanet = false;
+            angleSpeed2 = 0.0024;
+            angleSpeed3 = 0.002;
+            angleSpeed4 = 0.0016;
+            angleSpeed5 = 0.0012;
+            angleSpeed6 = 0.0008;
+            angleSpeed7 = 0.0004;
 
-        switch(planetIdx){
-            case 1:
-                for(let i = 0, len = objects.length; i < len; i++){
-                    $(objects[i].element).children('.symbol').animate({'opacity':0.7});
-                }
-                sinkPlanet(objects2, false);
-                sinkPlanet(objects3, false);
-                sinkPlanet(objects4, false);
-                sinkPlanet(objects5, false);
-                sinkPlanet(objects6, false);
-                sinkPlanet(objects7, false);
-                break;
-            case 2:
-                for(let i = 0, len = objects2.length; i < len; i++){
-                    $(objects2[i].element).children('.symbol').animate({'opacity':0.7});
-                }
-                sinkPlanet(objects, false);
-                sinkPlanet(objects3, false);
-                sinkPlanet(objects4, false);
-                sinkPlanet(objects5, false);
-                sinkPlanet(objects6, false);
-                sinkPlanet(objects7, false);
-                break;
-            case 3:
-                for(let i = 0, len = objects3.length; i < len; i++){
-                    $(objects3[i].element).children('.symbol').animate({'opacity':0.7});
-                }
-                sinkPlanet(objects2, false);
-                sinkPlanet(objects, false);
-                sinkPlanet(objects4, false);
-                sinkPlanet(objects5, false);
-                sinkPlanet(objects6, false);
-                sinkPlanet(objects7, false);
-                break;
-            case 4:
-                for(let i = 0, len = objects4.length; i < len; i++){
-                    $(objects4[i].element).children('.symbol').animate({'opacity':0.7});
-                }
-                sinkPlanet(objects2, false);
-                sinkPlanet(objects3, false);
-                sinkPlanet(objects, false);
-                sinkPlanet(objects5, false);
-                sinkPlanet(objects6, false);
-                sinkPlanet(objects7, false);
-                break;
-            case 5:
-                for(let i = 0, len = objects5.length; i < len; i++){
-                    $(objects5[i].element).children('.symbol').animate({'opacity':0.7});
-                }
-                sinkPlanet(objects2, false);
-                sinkPlanet(objects3, false);
-                sinkPlanet(objects4, false);
-                sinkPlanet(objects, false);
-                sinkPlanet(objects6, false);
-                sinkPlanet(objects7, false);
-                break;
-            case 6:
-                for(let i = 0, len = objects6.length; i < len; i++){
-                    $(objects6[i].element).children('.symbol').animate({'opacity':0.7});
-                }
-                sinkPlanet(objects2, false);
-                sinkPlanet(objects3, false);
-                sinkPlanet(objects4, false);
-                sinkPlanet(objects5, false);
-                sinkPlanet(objects, false);
-                sinkPlanet(objects7, false);
-                break;
-            case 7:
-                for(let i = 0, len = objects7.length; i < len; i++){
-                    $(objects7[i].element).children('.symbol').animate({'opacity':0.7});
-                }
-                sinkPlanet(objects2, false);
-                sinkPlanet(objects3, false);
-                sinkPlanet(objects4, false);
-                sinkPlanet(objects5, false);
-                sinkPlanet(objects6, false);
-                sinkPlanet(objects, false);
-                break;
+            switch(planetIdx){
+                case 1:
+                    for(let i = 0, len = objects.length; i < len; i++){
+                        $(objects[i].element).children('.symbol').animate({'opacity':0.7});
+                    }
+                    sinkPlanet(objects2, false);
+                    sinkPlanet(objects3, false);
+                    sinkPlanet(objects4, false);
+                    sinkPlanet(objects5, false);
+                    sinkPlanet(objects6, false);
+                    sinkPlanet(objects7, false);
+                    break;
+                case 2:
+                    for(let i = 0, len = objects2.length; i < len; i++){
+                        $(objects2[i].element).children('.symbol').animate({'opacity':0.7});
+                    }
+                    sinkPlanet(objects, false);
+                    sinkPlanet(objects3, false);
+                    sinkPlanet(objects4, false);
+                    sinkPlanet(objects5, false);
+                    sinkPlanet(objects6, false);
+                    sinkPlanet(objects7, false);
+                    break;
+                case 3:
+                    for(let i = 0, len = objects3.length; i < len; i++){
+                        $(objects3[i].element).children('.symbol').animate({'opacity':0.7});
+                    }
+                    sinkPlanet(objects2, false);
+                    sinkPlanet(objects, false);
+                    sinkPlanet(objects4, false);
+                    sinkPlanet(objects5, false);
+                    sinkPlanet(objects6, false);
+                    sinkPlanet(objects7, false);
+                    break;
+                case 4:
+                    for(let i = 0, len = objects4.length; i < len; i++){
+                        $(objects4[i].element).children('.symbol').animate({'opacity':0.7});
+                    }
+                    sinkPlanet(objects2, false);
+                    sinkPlanet(objects3, false);
+                    sinkPlanet(objects, false);
+                    sinkPlanet(objects5, false);
+                    sinkPlanet(objects6, false);
+                    sinkPlanet(objects7, false);
+                    break;
+                case 5:
+                    for(let i = 0, len = objects5.length; i < len; i++){
+                        $(objects5[i].element).children('.symbol').animate({'opacity':0.7});
+                    }
+                    sinkPlanet(objects2, false);
+                    sinkPlanet(objects3, false);
+                    sinkPlanet(objects4, false);
+                    sinkPlanet(objects, false);
+                    sinkPlanet(objects6, false);
+                    sinkPlanet(objects7, false);
+                    break;
+                case 6:
+                    for(let i = 0, len = objects6.length; i < len; i++){
+                        $(objects6[i].element).children('.symbol').animate({'opacity':0.7});
+                    }
+                    sinkPlanet(objects2, false);
+                    sinkPlanet(objects3, false);
+                    sinkPlanet(objects4, false);
+                    sinkPlanet(objects5, false);
+                    sinkPlanet(objects, false);
+                    sinkPlanet(objects7, false);
+                    break;
+                case 7:
+                    for(let i = 0, len = objects7.length; i < len; i++){
+                        $(objects7[i].element).children('.symbol').animate({'opacity':0.7});
+                    }
+                    sinkPlanet(objects2, false);
+                    sinkPlanet(objects3, false);
+                    sinkPlanet(objects4, false);
+                    sinkPlanet(objects5, false);
+                    sinkPlanet(objects6, false);
+                    sinkPlanet(objects, false);
+                    break;
+            }
+            planetIdx = 1;
+
+            TWEEN.removeAll();
+            
+            new TWEEN.Tween( camera.position )
+                .to( { x: 0, y: 3000, z: 10000 }, 2000 )
+                .easing( TWEEN.Easing.Exponential.InOut )
+                .start();
+
+            new TWEEN.Tween( camera.rotation )
+                .to( { x: 0, y: 0, z: 0 }, 2000 )
+                .easing( TWEEN.Easing.Exponential.InOut )
+                .start();
+
+            new TWEEN.Tween( this )
+                .to( {}, 2000 * 2 )
+                .onUpdate( render )
+                .onComplete(function(){
+                    if(planetIdx == 1){
+                        transformToSphere(2000);
+                    }
+                })
+                .start();
         }
-        planetIdx = 1;
-
-        TWEEN.removeAll();
-        
-        new TWEEN.Tween( camera.position )
-            .to( { x: 0, y: 3000, z: 10000 }, 2000 )
-            .easing( TWEEN.Easing.Exponential.InOut )
-            .start();
-
-        new TWEEN.Tween( camera.rotation )
-            .to( { x: 0, y: 0, z: 0 }, 2000 )
-            .easing( TWEEN.Easing.Exponential.InOut )
-            .start();
-
-        new TWEEN.Tween( this )
-            .to( {}, 2000 * 2 )
-            .onUpdate( render )
-            .onComplete(function(){
-                if(planetIdx == 1){
-                    transformToSphere(2000);
-                }
-            })
-            .start();
     }
 
     function closePanel(){
+        ispoping = false;
         TWEEN.removeAll();
         
         new TWEEN.Tween( popoutObj.position )
@@ -928,11 +934,6 @@ document.write(password());
         new TWEEN.Tween( this )
             .to( {}, 1000 * 2 )
             .onUpdate( render )
-            .onComplete(function(){
-                scene.remove(popoutObj);
-                ispoping = false;
-                $('#zoomOut').click(function(){zoomout()});
-            })
             .start();
     }
 
