@@ -59,11 +59,6 @@ document.write(password());
 
 <script type="text/javascript" src="js/slider.js"></script>
 <script>
-    
-
-
-
-
     //setup background
     var scene = document.getElementById('scene');
     var parallax = new Parallax(scene);
@@ -274,7 +269,7 @@ document.write(password());
     var popoutObj;
 
     var objects = [], objects2 = [], objects3 = [], objects4 = [], objects5 = [], objects6 = [], objects7 = [], group, group2, group3, group4, group5, group6, group7;
-    var targets = { sphere: [], sphere2: [], sphere3: [], sphere4: [], sphere5: [], sphere6: [], sphere7: []};
+    var targets = { sphere: [], sphere2: [], sphere3: [], sphere4: [], sphere5: [], sphere6: [], sphere7: [], helix: []};
     var zoomed = false;
     var selectedPlanet = false;
     var planetIdx = 0;
@@ -336,6 +331,32 @@ document.write(password());
         createSphere(5, imgs5, targets.sphere5, objects5, group5, 400);
         createSphere(6, imgs6, targets.sphere6, objects6, group6, 400);
         createSphere(7, imgs7, targets.sphere7, objects7, group7, 400);
+
+
+        // helix
+
+        var vectorHelix = new THREE.Vector3();
+        var cylindrical = new THREE.Cylindrical();
+
+        for ( var i = 0, l = objects.length; i < l; i ++ ) {
+
+            var theta = i * 0.3 + Math.PI;
+            var y = - ( i * 12 ) + 450;
+
+            var object = new THREE.Object3D();
+
+            cylindrical.set( 900, theta, y );
+
+            object.position.setFromCylindrical( cylindrical );
+
+            vectorHelix.x = object.position.x * 2;
+            vectorHelix.y = object.position.y;
+            vectorHelix.z = object.position.z * 2;
+
+            object.lookAt( vectorHelix );
+
+            targets.helix.push( object );
+        }
 
         renderer = new THREE.CSS3DRenderer();
         renderer.setSize( window.innerWidth, window.innerHeight );
@@ -451,7 +472,8 @@ document.write(password());
                     switch(idx){
                         case 1:
                             planetIdx = 1;
-                            zoomTo = {'x':0, 'y':0, 'z':2000};
+                            zoomTo = {'x':0, 'y':0, 'z':2400};
+                            transformToHelix(2000);
                             break;
                         case 2:
                             planetIdx = 2;
@@ -490,9 +512,9 @@ document.write(password());
             element.appendChild( data[ i ] );
 
             var object = new THREE.CSS3DObject( element );
-            object.position.x = Math.random() * 4000 - 2000;
-            object.position.y = Math.random() * 4000 - 2000;
-            object.position.z = Math.random() * 4000 - 2000;
+            object.position.x = Math.random() * 8000 - 4000;
+            object.position.y = Math.random() * 8000 - 4000;
+            object.position.z = Math.random() * 8000 - 4000;
             
             g.add(object);
             objs.push( object );
@@ -608,6 +630,7 @@ document.write(password());
                         case 1:
                             planetIdx = 1;
                             zoomTo = {'x':0, 'y':0, 'z':2000};
+                            transformToHelix(2000);
                             break;
                         case 2:
                             planetIdx = 2;
@@ -646,9 +669,9 @@ document.write(password());
             element2.appendChild( data[ i+1 ] );
 
             var object2 = new THREE.CSS3DObject( element2 );
-            object2.position.x = Math.random() * 4000 - 2000;
-            object2.position.y = Math.random() * 4000 - 2000;
-            object2.position.z = Math.random() * 4000 - 2000;
+            object2.position.x = Math.random() * 8000 - 4000;
+            object2.position.y = Math.random() * 8000 - 4000;
+            object2.position.z = Math.random() * 8000 - 4000;
             
             g.add(object2);
             objs.push( object2 );
@@ -666,6 +689,44 @@ document.write(password());
     }
 
     function zoomin(targetPosi){
+        switch(planetIdx){
+            case 1:
+                for(let i = 0, len = objects.length; i < len; i++){
+                    $(objects[i].element).children('.symbol').animate({'opacity':1});
+                }
+                break;
+            case 2:
+                for(let i = 0, len = objects2.length; i < len; i++){
+                    $(objects2[i].element).children('.symbol').animate({'opacity':1});
+                }
+                break;
+            case 3:
+                for(let i = 0, len = objects3.length; i < len; i++){
+                    $(objects3[i].element).children('.symbol').animate({'opacity':1});
+                }
+                break;
+            case 4:
+                for(let i = 0, len = objects4.length; i < len; i++){
+                    $(objects4[i].element).children('.symbol').animate({'opacity':1});
+                }
+                break;
+            case 5:
+                for(let i = 0, len = objects5.length; i < len; i++){
+                    $(objects5[i].element).children('.symbol').animate({'opacity':1});
+                }
+                break;
+            case 6:
+                for(let i = 0, len = objects6.length; i < len; i++){
+                    $(objects6[i].element).children('.symbol').animate({'opacity':1});
+                }
+                break;
+            case 7:
+                for(let i = 0, len = objects7.length; i < len; i++){
+                    $(objects7[i].element).children('.symbol').animate({'opacity':1});
+                }
+                break;
+        }
+
         TWEEN.removeAll();
         
         new TWEEN.Tween( camera.position )
@@ -679,8 +740,13 @@ document.write(password());
             .start();
 
         new TWEEN.Tween( this )
-            .to( {}, 2000 * 2 )
+            .to( {}, 2000 )
             .onUpdate( render )
+            .onComplete(function(){
+                if(planetIdx == 1){
+                    transformToHelix(2000);
+                }
+            })
             .start();
     }
 
@@ -694,6 +760,45 @@ document.write(password());
         angleSpeed5 = 0.0012;
         angleSpeed6 = 0.0008;
         angleSpeed7 = 0.0004;
+
+        switch(planetIdx){
+            case 1:
+                for(let i = 0, len = objects.length; i < len; i++){
+                    $(objects[i].element).children('.symbol').animate({'opacity':0.7});
+                }
+                break;
+            case 2:
+                for(let i = 0, len = objects2.length; i < len; i++){
+                    $(objects2[i].element).children('.symbol').animate({'opacity':0.7});
+                }
+                break;
+            case 3:
+                for(let i = 0, len = objects3.length; i < len; i++){
+                    $(objects3[i].element).children('.symbol').animate({'opacity':0.7});
+                }
+                break;
+            case 4:
+                for(let i = 0, len = objects4.length; i < len; i++){
+                    $(objects4[i].element).children('.symbol').animate({'opacity':0.7});
+                }
+                break;
+            case 5:
+                for(let i = 0, len = objects5.length; i < len; i++){
+                    $(objects5[i].element).children('.symbol').animate({'opacity':0.7});
+                }
+                break;
+            case 6:
+                for(let i = 0, len = objects6.length; i < len; i++){
+                    $(objects6[i].element).children('.symbol').animate({'opacity':0.7});
+                }
+                break;
+            case 7:
+                for(let i = 0, len = objects7.length; i < len; i++){
+                    $(objects7[i].element).children('.symbol').animate({'opacity':0.7});
+                }
+                break;
+        }
+
         TWEEN.removeAll();
         
         new TWEEN.Tween( camera.position )
@@ -709,6 +814,11 @@ document.write(password());
         new TWEEN.Tween( this )
             .to( {}, 2000 * 2 )
             .onUpdate( render )
+            .onComplete(function(){
+                if(planetIdx == 1){
+                    transformToSphere(2000);
+                }
+            })
             .start();
     }
 
@@ -743,7 +853,57 @@ document.write(password());
             .start();
     }
 
+    function transformToHelix( duration ){
+        TWEEN.removeAll();
 
+        for ( var i = 0; i < objects.length; i ++ ) {
+
+            var object = objects[ i ];
+            var target = targets.helix[ i ];
+
+            new TWEEN.Tween( object.position )
+                .to( { x: target.position.x, y: target.position.y, z: target.position.z }, Math.random() * duration + duration )
+                .easing( TWEEN.Easing.Exponential.InOut )
+                .start();
+
+            new TWEEN.Tween( object.rotation )
+                .to( { x: target.rotation.x, y: target.rotation.y, z: target.rotation.z }, Math.random() * duration + duration )
+                .easing( TWEEN.Easing.Exponential.InOut )
+                .start();
+
+        }
+
+        new TWEEN.Tween( this )
+            .to( {}, duration )
+            .onUpdate( render )
+            .start();
+    }
+
+    function transformToSphere( duration ){
+        TWEEN.removeAll();
+
+        for ( var i = 0; i < objects.length; i ++ ) {
+
+            var object = objects[ i ];
+            var target = targets.sphere[ i ];
+
+            new TWEEN.Tween( object.position )
+                .to( { x: target.position.x, y: target.position.y, z: target.position.z }, Math.random() * duration + duration )
+                .easing( TWEEN.Easing.Exponential.InOut )
+                .start();
+
+            new TWEEN.Tween( object.rotation )
+                .to( { x: target.rotation.x, y: target.rotation.y, z: target.rotation.z }, Math.random() * duration + duration )
+                .easing( TWEEN.Easing.Exponential.InOut )
+                .start();
+
+        }
+
+        new TWEEN.Tween( this )
+            .to( {}, duration )
+            .onUpdate( render )
+            .start();
+    }
 
     function transform( duration ) {
 
