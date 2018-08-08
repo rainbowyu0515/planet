@@ -31,6 +31,11 @@ document.write(password());
 <script src="js/CSS3DRenderer.js"></script>
 <script src="js/libs/parallax.js"></script>
 
+<audio id="bgm" loop="loop" autoplay="autoplay">
+  <source src="music.mp3" type="audio/mpeg" />
+Your browser does not support the audio element.
+</audio>
+
  <ul id="scene">
   <li class="layer" id="specks" data-depth="0.1"></li>
   <li class="layer" id="layer-1" data-depth="0.15">
@@ -56,6 +61,8 @@ document.write(password());
     <div data-target='right' class="side-nav side-nav--right"></div>
     <div data-target='left' class="side-nav side-nav--left"></div>
 </div>
+
+<button id="audioCtrl" class="audioButton">S</button>
 
 <script type="text/javascript" src="js/slider.js"></script>
 <script>
@@ -115,6 +122,7 @@ document.write(password());
         'img/scene1/a61.png','img/scene1/a62.png',
         'img/scene1/a71.png','img/scene1/a72.png',
         'img/scene1/a81.png','img/scene1/a82.png',
+
         'img/scene1/b11.png','img/scene1/b12.png',
         'img/scene1/b21.png','img/scene1/b22.png',
         'img/scene1/b31.png','img/scene1/b32.png',
@@ -122,6 +130,7 @@ document.write(password());
         'img/scene1/b51.png','img/scene1/b52.png',
         'img/scene1/b61.png','img/scene1/b62.png',
         'img/scene1/b71.png','img/scene1/b72.png',
+
         'img/scene1/c11.png','img/scene1/c12.png',
         'img/scene1/c21.png','img/scene1/c22.png',
         'img/scene1/c31.png','img/scene1/c32.png',
@@ -132,6 +141,7 @@ document.write(password());
         'img/scene1/c81.png','img/scene1/c82.png',
         'img/scene1/c91.png','img/scene1/c92.png',
         'img/scene1/c101.png','img/scene1/c102.png',
+
         'img/scene1/d11.png','img/scene1/d12.png',
         'img/scene1/d21.png','img/scene1/d22.png',
         'img/scene1/d31.png','img/scene1/d32.png',
@@ -140,6 +150,7 @@ document.write(password());
         'img/scene1/d61.png','img/scene1/d62.png',
         'img/scene1/d71.png','img/scene1/d72.png',
         'img/scene1/d81.png','img/scene1/d82.png',
+
         'img/scene1/e11.png','img/scene1/e12.png',
         'img/scene1/e21.png','img/scene1/e22.png',
         'img/scene1/e31.png','img/scene1/e32.png',
@@ -147,26 +158,60 @@ document.write(password());
         'img/scene1/e51.png','img/scene1/e52.png',
         'img/scene1/e61.png','img/scene1/e62.png',
         'img/scene1/e71.png','img/scene1/e72.png',
-        'img/scene1/e81.png','img/scene1/e82.png',
-        'img/scene1/f11.png','img/scene1/f12.png',
-        'img/scene1/f21.png','img/scene1/f22.png',
-        'img/scene1/f31.png','img/scene1/f32.png',
-        'img/scene1/f41.png','img/scene1/f42.png',
-        'img/scene1/f51.png','img/scene1/f52.png',
-        'img/scene1/f61.png','img/scene1/f62.png',
-        'img/scene1/f71.png','img/scene1/f72.png',
-        'img/scene1/f81.png','img/scene1/f82.png'
+
+        'img/scene1/f11.JPG','img/scene1/f12.jpg',
+        'img/scene1/f21.JPG','img/scene1/f22.jpg',
+        'img/scene1/f31.JPG','img/scene1/f32.jpg',
+        'img/scene1/f41.JPG','img/scene1/f42.jpg',
+        'img/scene1/f51.JPG','img/scene1/f52.png',
+        'img/scene1/f61.JPG','img/scene1/f62.jpg',
+        'img/scene1/f71.JPG','img/scene1/f72.jpg',
+        'img/scene1/f81.JPG','img/scene1/f82.jpg',
+        'img/scene1/f91.JPG','img/scene1/f92.jpg',
+        'img/scene1/f101.JPG','img/scene1/f102.jpg',
+        'img/scene1/f111.JPG','img/scene1/f112.jpg',
+        'img/scene1/f121.JPG','img/scene1/f122.jpg',
+        'img/scene1/f131.JPG','img/scene1/f132.jpg',
+        'img/scene1/f141.JPG','img/scene1/f142.jpg',
+        'img/scene1/f151.JPG','img/scene1/f152.jpg',
+        'img/scene1/f161.JPG','img/scene1/f162.jpg',
+        'img/scene1/f171.JPG','img/scene1/f172.jpg',
+        'img/scene1/f181.JPG','img/scene1/f182.jpg',
+        'img/scene1/f191.JPG','img/scene1/f192.jpg',
+        'img/scene1/f201.JPG','img/scene1/f202.jpg',
+        'img/scene1/f211.JPG','img/scene1/f212.jpg',
+        'img/scene1/f221.JPG','img/scene1/f222.jpg',
+        'img/scene1/f231.JPG','img/scene1/f232.jpg',
+        'img/scene1/f241.JPG','img/scene1/f242.jpg',
+        'img/scene1/f251.JPG','img/scene1/f252.jpg'
     ];
 
     var table2 = [//f
-        'img/scene7/f11.png','img/scene7/f12.png',
-        'img/scene7/f21.png','img/scene7/f22.png',
-        'img/scene7/f31.png','img/scene7/f32.png',
-        'img/scene7/f41.png','img/scene7/f42.png',
-        'img/scene7/f51.png','img/scene7/f52.png',
-        'img/scene7/f61.png','img/scene7/f62.png',
-        'img/scene7/f71.png','img/scene7/f72.png',
-        'img/scene7/f81.png','img/scene7/f82.png'
+        'img/scene7/f11.JPG','img/scene7/f12.jpg',
+        'img/scene7/f21.JPG','img/scene7/f22.jpg',
+        'img/scene7/f31.JPG','img/scene7/f32.jpg',
+        'img/scene7/f41.JPG','img/scene7/f42.jpg',
+        'img/scene7/f51.JPG','img/scene7/f52.png',
+        'img/scene7/f61.JPG','img/scene7/f62.jpg',
+        'img/scene7/f71.JPG','img/scene7/f72.jpg',
+        'img/scene7/f81.JPG','img/scene7/f82.jpg',
+        'img/scene7/f91.JPG','img/scene7/f92.jpg',
+        'img/scene7/f101.JPG','img/scene7/f102.jpg',
+        'img/scene7/f111.JPG','img/scene7/f112.jpg',
+        'img/scene7/f121.JPG','img/scene7/f122.jpg',
+        'img/scene7/f131.JPG','img/scene7/f132.jpg',
+        'img/scene7/f141.JPG','img/scene7/f142.jpg',
+        'img/scene7/f151.JPG','img/scene7/f152.jpg',
+        'img/scene7/f161.JPG','img/scene7/f162.jpg',
+        'img/scene7/f171.JPG','img/scene7/f172.jpg',
+        'img/scene7/f181.JPG','img/scene7/f182.jpg',
+        'img/scene7/f191.JPG','img/scene7/f192.jpg',
+        'img/scene7/f201.JPG','img/scene7/f202.jpg',
+        'img/scene7/f211.JPG','img/scene7/f212.jpg',
+        'img/scene7/f221.JPG','img/scene7/f222.jpg',
+        'img/scene7/f231.JPG','img/scene7/f232.jpg',
+        'img/scene7/f241.JPG','img/scene7/f242.jpg',
+        'img/scene7/f251.JPG','img/scene7/f252.jpg'
     ];
 
     var table3 = [//e
@@ -176,19 +221,18 @@ document.write(password());
         'img/scene6/e41.png','img/scene6/e42.png',
         'img/scene6/e51.png','img/scene6/e52.png',
         'img/scene6/e61.png','img/scene6/e62.png',
-        'img/scene6/e71.png','img/scene6/e72.png',
-        'img/scene6/e81.png','img/scene6/e82.png'
+        'img/scene6/e71.png','img/scene6/e72.png'
     ];
 
     var table4 = [//d
-        'img/scene4/d11.png','img/scene5/d12.png',
-        'img/scene4/d21.png','img/scene5/d22.png',
-        'img/scene4/d31.png','img/scene5/d32.png',
-        'img/scene4/d41.png','img/scene5/d42.png',
-        'img/scene4/d51.png','img/scene5/d52.png',
-        'img/scene4/d61.png','img/scene5/d62.png',
-        'img/scene4/d71.png','img/scene5/d72.png',
-        'img/scene4/d81.png','img/scene5/d82.png'
+        'img/scene5/d11.png','img/scene5/d12.png',
+        'img/scene5/d21.png','img/scene5/d22.png',
+        'img/scene5/d31.png','img/scene5/d32.png',
+        'img/scene5/d41.png','img/scene5/d42.png',
+        'img/scene5/d51.png','img/scene5/d52.png',
+        'img/scene5/d61.png','img/scene5/d62.png',
+        'img/scene5/d71.png','img/scene5/d72.png',
+        'img/scene5/d81.png','img/scene5/d82.png'
     ];
 
     var table5 = [//b
@@ -224,6 +268,17 @@ document.write(password());
         'img/scene2/a71.png','img/scene2/a72.png',
         'img/scene2/a81.png','img/scene2/a82.png'
     ];
+
+    var txts = [
+        'img/bigball.png',
+        'img/f1.png',
+        'img/f2.png',
+        'img/e0.png',
+        'img/d0.png',
+        'img/b0.png',
+        'img/c0.png',
+        'img/a0.png'
+    ]
 
     function preloadImg(list,imgs) {
         console.log('preloading images');
@@ -272,7 +327,9 @@ document.write(password());
     var ispoping = false;
 
     var objects = [], objects2 = [], objects3 = [], objects4 = [], objects5 = [], objects6 = [], objects7 = [], group, group2, group3, group4, group5, group6, group7;
-    var targets = { sphere: [], sphere2: [], sphere3: [], sphere4: [], sphere5: [], sphere6: [], sphere7: [], helix: [], circle: []};
+    var objects2_1 = [], objects2_2 = [];
+    var txtBlocks = [];
+    var targets = { sphere: [], sphere2: [], sphere3: [], sphere4: [], sphere5: [], sphere6: [], sphere7: [], helix: [], circle1: [], circle2: []};
     var zoomed = false;
     var selectedPlanet = false;
     var planetIdx = 0;
@@ -280,7 +337,8 @@ document.write(password());
 
     // init(animate);
 
-    function init(callback) {
+
+    function init() {
         group = new THREE.Group();
         group.position.set(0, 0, 0);
         group.rotation.set(0, 0, 0);
@@ -319,6 +377,34 @@ document.write(password());
         tmpVec.y = 0;
         tmpVec.z = 0;
 
+        //creat txt blocks
+        for(let i = 0; i < txts.length; i++){
+            var element = document.createElement( 'div' );
+            element.className = 'element2';
+            element.style.backgroundColor = 'rgba(0,127,127,' + ( Math.random() * 0.5 + 0.25 ) + ')';
+
+            var symbol = document.createElement( 'img' );
+            symbol.className = 'symbol2';
+            symbol.src = txts[ i ];
+            element.appendChild( symbol );
+
+            var close = document.createElement( 'div' );
+            close.className = 'closeButton';
+            close.textContent = 'X';
+            element.appendChild( close );
+
+            close.onclick = function(){
+                closeTxt();
+            }
+
+            var object = new THREE.CSS3DObject( element );
+            object.position.x = -10000;
+            object.position.y = 0;
+            object.position.z = 0;
+            scene.add( object );
+            txtBlocks.push(object);
+        }
+
         // sphere
         createSphere(1, imgs1, targets.sphere, objects, group, 800);
         createSphere(2, imgs2, targets.sphere2, objects2, group2, 400);
@@ -328,7 +414,6 @@ document.write(password());
         createSphere(6, imgs6, targets.sphere6, objects6, group6, 400);
         createSphere(7, imgs7, targets.sphere7, objects7, group7, 400);
 
-
         // helix
 
         var vectorHelix = new THREE.Vector3();
@@ -337,7 +422,7 @@ document.write(password());
         for ( var i = 0, l = objects.length; i < l; i ++ ) {
 
             var theta = i * 0.3 + Math.PI;
-            var y = - ( i * 12 ) + 450;
+            var y = - ( i * 12 ) + 700;
 
             var object = new THREE.Object3D();
 
@@ -358,27 +443,51 @@ document.write(password());
 
         //circle
 
-        var vectorCircle = new THREE.Vector3();
-        var cylindricalCircle = new THREE.Cylindrical();
+        var vectorCircle1 = new THREE.Vector3();
+        var cylindricalCircle1 = new THREE.Cylindrical();
 
-        for ( var i = 0, l = objects.length; i < l; i ++ ) {
+        for ( var i = 0, l = objects2_1.length; i < l; i ++ ) {
 
             var theta = i * 0.3 + Math.PI;
-            var y = - ( i * 12 ) + 450;
+            var y = 0;
 
             var object = new THREE.Object3D();
 
-            cylindricalCircle.set( 900, theta, y );
+            cylindricalCircle1.set( 1400, theta, y );
 
-            object.position.setFromCylindrical( cylindricalCircle );
+            object.position.setFromCylindrical( cylindricalCircle1 );
 
-            vectorCircle.x = object.position.x * 2;
-            vectorCircle.y = object.position.y;
-            vectorCircle.z = object.position.z * 2;
+            vectorCircle1.x = object.position.x * 2;
+            vectorCircle1.y = object.position.y;
+            vectorCircle1.z = object.position.z * 2;
 
-            object.lookAt( vectorCircle );
+            object.lookAt( vectorCircle1 );
 
-            targets.helix.push( object );
+            targets.circle1.push( object );
+        }
+
+        var vectorCircle2 = new THREE.Vector3();
+        var cylindricalCircle2 = new THREE.Cylindrical();
+
+        for ( var i = 0, l = objects2_2.length; i < l; i ++ ) {
+
+            var theta = i * 0.3 + Math.PI;
+            // var y = - ( i * 12 ) + 450;
+            var y = 0;
+
+            var object = new THREE.Object3D();
+
+            cylindricalCircle2.set( 1400, theta, y );
+
+            object.position.setFromCylindrical( cylindricalCircle2 );
+
+            vectorCircle2.x = object.position.x * 2;
+            vectorCircle2.y = object.position.y;
+            vectorCircle2.z = object.position.z * 2;
+
+            object.lookAt( vectorCircle2 );
+
+            targets.circle2.push( object );
         }
 
         //end circle
@@ -388,10 +497,29 @@ document.write(password());
         renderer.domElement.style.position = 'absolute';
         document.getElementById( 'container' ).appendChild( renderer.domElement );
 
-        transform( 2000 );
+        
 
         window.addEventListener( 'resize', onWindowResize, false );
-        callback();
+    }
+
+    function closeTxt(){
+        TWEEN.removeAll();
+
+        for ( var i = 0; i < txtBlocks.length; i ++ ) {
+
+            var object = txtBlocks[ i ];
+
+            new TWEEN.Tween( object.position )
+                .to( { x: -10000, y: 0, z: 0 }, 1000 )
+                .easing( TWEEN.Easing.Exponential.InOut )
+                .start();
+
+        }
+
+        new TWEEN.Tween( this )
+            .to( {}, 1000 )
+            .onUpdate( render )
+            .start();
     }
 
     function createSphere(idx, data, container, objs, g, r){
@@ -403,7 +531,7 @@ document.write(password());
             element.className = 'element';
             element.style.backgroundColor = 'rgba(0,127,127,' + ( Math.random() * 0.5 + 0.25 ) + ')';
             element.onclick = function(){
-                console.log("zoomed: " + zoomed + ", ispoping: " + ispoping);
+                
                 if(zoomed){
                     if(!ispoping){
                         scene.remove(popoutObj);
@@ -503,12 +631,13 @@ document.write(password());
                     switch(idx){
                         case 1:
                             planetIdx = 1;
-                            zoomTo = {'x':0, 'y':0, 'z':2600};
-                            transformToHelix(2000);
+                            zoomTo = {'x':0, 'y':0, 'z':2700};
+                            // transformToShape( objects, targets.helix, 2000);
                             break;
                         case 2:
                             planetIdx = 2;
-                            zoomTo = {'x':group2.position.x, 'y': 0, 'z':group2.position.z+1200};
+                            zoomTo = {'x':group2.position.x, 'y': 0, 'z':group2.position.z+2400};
+                            // transformToShape(objects2_1, targets.circle1, 2000);
                             break;
                         case 3:
                             planetIdx = 3;
@@ -531,7 +660,11 @@ document.write(password());
                             zoomTo = {'x':group7.position.x, 'y': 0, 'z':group7.position.z+1200};
                             break;
                     }
-                    zoomin(zoomTo);
+                    if(planetIdx == 2){
+                        zoomin(zoomTo, 2);
+                    }else{
+                        zoomin(zoomTo);
+                    }
                 }
                 
             }
@@ -549,6 +682,9 @@ document.write(password());
             
             g.add(object);
             objs.push( object );
+            if(idx == 2){
+                objects2_1.push(object);
+            }
 
             var phi = Math.acos( -1 + ( 2 * i ) / data.length );
             var theta = Math.sqrt( data.length * Math.PI ) * phi;
@@ -566,7 +702,7 @@ document.write(password());
             element2.className = 'element';
             element2.style.backgroundColor = 'rgba(0,127,127,' + ( Math.random() * 0.5 + 0.25 ) + ')';
             element2.onclick = function(){
-                console.log("zoomed: " + zoomed + ", ispoping: " + ispoping);
+                
                 if(zoomed){
                     if(!ispoping){
                         scene.remove(popoutObj);
@@ -666,12 +802,13 @@ document.write(password());
                     switch(idx){
                         case 1:
                             planetIdx = 1;
-                            zoomTo = {'x':0, 'y':0, 'z':2600};
-                            transformToHelix(2000);
+                            zoomTo = {'x':0, 'y':0, 'z':2700};
+                            // transformToShape( objects, targets.helix, 2000);
                             break;
                         case 2:
                             planetIdx = 2;
-                            zoomTo = {'x':group2.position.x, 'y': 0, 'z':group2.position.z+1200};
+                            zoomTo = {'x':group2.position.x, 'y': 0, 'z':group2.position.z+2400};
+                            // transformToShape(objects2_2, targets.circle2, 2000);
                             break;
                         case 3:
                             planetIdx = 3;
@@ -694,7 +831,11 @@ document.write(password());
                             zoomTo = {'x':group7.position.x, 'y': 0, 'z':group7.position.z+1200};
                             break;
                     }
-                    zoomin(zoomTo);
+                    if(planetIdx == 2){
+                        zoomin(zoomTo, 3);
+                    }else{
+                        zoomin(zoomTo);
+                    }
                 }
                 
             }
@@ -712,6 +853,9 @@ document.write(password());
             
             g.add(object2);
             objs.push( object2 );
+            if(idx == 2){
+                objects2_2.push(object2);
+            }
 
             var phi2 = Math.acos( -1 + ( 2 * (i+1) ) / data.length );
             var theta2 = Math.sqrt( data.length * Math.PI ) * phi2;
@@ -725,12 +869,36 @@ document.write(password());
         scene.add(g);
     }
 
-    function zoomin(targetPosi){
+    function slideTxt(posi, idx){
+        console.log(posi);
+        TWEEN.removeAll();
+
+        var object = txtBlocks[ idx ];
+        console.log(object);
+
+        new TWEEN.Tween( object.position )
+            .to( { x: posi.x, y: posi.y, z: posi.z }, 1000 )
+            .easing( TWEEN.Easing.Exponential.InOut )
+            .start();
+
+        new TWEEN.Tween( this )
+            .to( {}, 1000 )
+            .onUpdate( render )
+            .start();
+    }
+
+    function zoomin(targetPosi, flag = 1){
+        let tmpTxtPosi = new THREE.Vector3(), tmpIdx;
         switch(planetIdx){
             case 1:
                 for(let i = 0, len = objects.length; i < len; i++){
                     $(objects[i].element).children('.symbol').animate({'opacity':1});
                 }
+                // slideTxt(group.position, 0);
+                tmpTxtPosi.x = 0;
+                tmpTxtPosi.y = 0;
+                tmpTxtPosi.z = 1800; 
+                tmpIdx = 0;
                 sinkPlanet(objects2, true);
                 sinkPlanet(objects3, true);
                 sinkPlanet(objects4, true);
@@ -742,6 +910,14 @@ document.write(password());
                 for(let i = 0, len = objects2.length; i < len; i++){
                     $(objects2[i].element).children('.symbol').animate({'opacity':1});
                 }
+                if(flag == 2){
+                    tmpTxtPosi = group2.position; 
+                    tmpIdx = 1;
+                }else if(flag == 3){
+                    tmpTxtPosi = group2.position; 
+                    tmpIdx = 2;
+                }
+                tmpTxtPosi.z += 1500;
                 sinkPlanet(objects, true);
                 sinkPlanet(objects3, true);
                 sinkPlanet(objects4, true);
@@ -753,6 +929,9 @@ document.write(password());
                 for(let i = 0, len = objects3.length; i < len; i++){
                     $(objects3[i].element).children('.symbol').animate({'opacity':1});
                 }
+                tmpTxtPosi = group3.position;
+                tmpTxtPosi.z += 450; 
+                tmpIdx = 3;
                 sinkPlanet(objects2, true);
                 sinkPlanet(objects, true);
                 sinkPlanet(objects4, true);
@@ -764,6 +943,9 @@ document.write(password());
                 for(let i = 0, len = objects4.length; i < len; i++){
                     $(objects4[i].element).children('.symbol').animate({'opacity':1});
                 }
+                tmpTxtPosi = group4.position;
+                tmpTxtPosi.z += 450; 
+                tmpIdx = 4;
                 sinkPlanet(objects2, true);
                 sinkPlanet(objects3, true);
                 sinkPlanet(objects, true);
@@ -775,6 +957,9 @@ document.write(password());
                 for(let i = 0, len = objects5.length; i < len; i++){
                     $(objects5[i].element).children('.symbol').animate({'opacity':1});
                 }
+                tmpTxtPosi = group5.position;
+                tmpTxtPosi.z += 450;
+                tmpIdx = 5;
                 sinkPlanet(objects2, true);
                 sinkPlanet(objects3, true);
                 sinkPlanet(objects4, true);
@@ -786,6 +971,9 @@ document.write(password());
                 for(let i = 0, len = objects6.length; i < len; i++){
                     $(objects6[i].element).children('.symbol').animate({'opacity':1});
                 }
+                tmpTxtPosi = group6.position;
+                tmpTxtPosi.z += 450;
+                tmpIdx = 6;
                 sinkPlanet(objects2, true);
                 sinkPlanet(objects3, true);
                 sinkPlanet(objects4, true);
@@ -797,6 +985,9 @@ document.write(password());
                 for(let i = 0, len = objects7.length; i < len; i++){
                     $(objects7[i].element).children('.symbol').animate({'opacity':1});
                 }
+                tmpTxtPosi = group7.position;
+                tmpTxtPosi.z += 450;
+                tmpIdx = 7;
                 sinkPlanet(objects2, true);
                 sinkPlanet(objects3, true);
                 sinkPlanet(objects4, true);
@@ -818,12 +1009,22 @@ document.write(password());
             .easing( TWEEN.Easing.Exponential.InOut )
             .start();
 
+        new TWEEN.Tween( txtBlocks[ tmpIdx ].position )
+            .to( { x: tmpTxtPosi.x, y: tmpTxtPosi.y, z: tmpTxtPosi.z }, 2000 )
+            .easing( TWEEN.Easing.Exponential.InOut )
+            .start();
+
+
         new TWEEN.Tween( this )
             .to( {}, 2000 )
             .onUpdate( render )
             .onComplete(function(){
                 if(planetIdx == 1){
-                    transformToHelix(2000);
+                    transformToShape( objects, targets.helix, 2000);
+                }else if(planetIdx == 2 && flag == 2){
+                    transformToShape( objects2_1, targets.circle1, 2000);
+                }else if(planetIdx == 2 && flag == 3){
+                    transformToShape( objects2_2, targets.circle2, 2000);
                 }
             })
             .start();
@@ -844,7 +1045,7 @@ document.write(password());
             switch(planetIdx){
                 case 1:
                     for(let i = 0, len = objects.length; i < len; i++){
-                        $(objects[i].element).children('.symbol').animate({'opacity':0.7});
+                        $(objects[i].element).children('.symbol').animate({'opacity':0.5});
                     }
                     sinkPlanet(objects2, false);
                     sinkPlanet(objects3, false);
@@ -855,7 +1056,7 @@ document.write(password());
                     break;
                 case 2:
                     for(let i = 0, len = objects2.length; i < len; i++){
-                        $(objects2[i].element).children('.symbol').animate({'opacity':0.7});
+                        $(objects2[i].element).children('.symbol').animate({'opacity':0.5});
                     }
                     sinkPlanet(objects, false);
                     sinkPlanet(objects3, false);
@@ -866,7 +1067,7 @@ document.write(password());
                     break;
                 case 3:
                     for(let i = 0, len = objects3.length; i < len; i++){
-                        $(objects3[i].element).children('.symbol').animate({'opacity':0.7});
+                        $(objects3[i].element).children('.symbol').animate({'opacity':0.5});
                     }
                     sinkPlanet(objects2, false);
                     sinkPlanet(objects, false);
@@ -877,7 +1078,7 @@ document.write(password());
                     break;
                 case 4:
                     for(let i = 0, len = objects4.length; i < len; i++){
-                        $(objects4[i].element).children('.symbol').animate({'opacity':0.7});
+                        $(objects4[i].element).children('.symbol').animate({'opacity':0.5});
                     }
                     sinkPlanet(objects2, false);
                     sinkPlanet(objects3, false);
@@ -888,7 +1089,7 @@ document.write(password());
                     break;
                 case 5:
                     for(let i = 0, len = objects5.length; i < len; i++){
-                        $(objects5[i].element).children('.symbol').animate({'opacity':0.7});
+                        $(objects5[i].element).children('.symbol').animate({'opacity':0.5});
                     }
                     sinkPlanet(objects2, false);
                     sinkPlanet(objects3, false);
@@ -899,7 +1100,7 @@ document.write(password());
                     break;
                 case 6:
                     for(let i = 0, len = objects6.length; i < len; i++){
-                        $(objects6[i].element).children('.symbol').animate({'opacity':0.7});
+                        $(objects6[i].element).children('.symbol').animate({'opacity':0.5});
                     }
                     sinkPlanet(objects2, false);
                     sinkPlanet(objects3, false);
@@ -910,7 +1111,7 @@ document.write(password());
                     break;
                 case 7:
                     for(let i = 0, len = objects7.length; i < len; i++){
-                        $(objects7[i].element).children('.symbol').animate({'opacity':0.7});
+                        $(objects7[i].element).children('.symbol').animate({'opacity':0.5});
                     }
                     sinkPlanet(objects2, false);
                     sinkPlanet(objects3, false);
@@ -920,7 +1121,7 @@ document.write(password());
                     sinkPlanet(objects, false);
                     break;
             }
-            planetIdx = 1;
+            
 
             TWEEN.removeAll();
             
@@ -939,8 +1140,11 @@ document.write(password());
                 .onUpdate( render )
                 .onComplete(function(){
                     if(planetIdx == 1){
-                        transformToSphere(2000);
+                        transformToShape(objects, targets.sphere, 2000);
+                    }else if(planetIdx == 2){
+                        transformToShape(objects2, targets.sphere2, 2000);
                     }
+                    planetIdx = 1;
                 })
                 .start();
         }
@@ -988,13 +1192,16 @@ document.write(password());
             .start();
     }
 
-    function transformToHelix( duration ){
+    function transformToShape( objs, tars, duration ){
+        console.log(objs);
+        console.log(tars);
+
         TWEEN.removeAll();
 
-        for ( var i = 0; i < objects.length; i ++ ) {
+        for ( var i = 0; i < objs.length; i ++ ) {
 
-            var object = objects[ i ];
-            var target = targets.helix[ i ];
+            var object = objs[ i ];
+            var target = tars[ i ];
 
             new TWEEN.Tween( object.position )
                 .to( { x: target.position.x, y: target.position.y, z: target.position.z }, Math.random() * duration + duration )

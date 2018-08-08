@@ -1,5 +1,14 @@
 $(document).ready(function () {
 	$('#cont').css({'margin-top':-$(window).height()})
+	$('#audioCtrl').click(function(){
+		var bgm = document.getElementById('bgm');
+		if (bgm.paused) {
+	        bgm.play();
+		}else{
+	        bgm.pause();
+		}
+	})
+
 
 	var $cont = $('.cont');
 	var $slider = $('.slider');
@@ -105,11 +114,14 @@ $(document).ready(function () {
 		bullets(curSlide + 1);
 		curSlide++;
 
-		$('#cont').animate({'opacity':0},4000,function(){
+		$('#cont').animate({'opacity':0},3000,function(){
 			$('#cont').css({'display':'none'});
 			$('#container').css({'display':'block'});
-			$('#container').animate({'opacity':1},4000);
-			init(animate);
+			$('#container').animate({'opacity':1},1000);
+			// init(animate);
+			init();
+			transform( 4000 );
+			animate();
 		});
 		
 	}
