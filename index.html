@@ -443,6 +443,9 @@ document.write(password());
                     angleSpeed2 = 0;
                     angleSpeed3 = 0;
                     angleSpeed4 = 0;
+                    angleSpeed5 = 0;
+                    angleSpeed6 = 0;
+                    angleSpeed7 = 0;
                     selectedPlanet = true;
                     var zoomTo = {'x':0, 'y':3000, 'z':10000};
                     switch(idx){
@@ -685,9 +688,12 @@ document.write(password());
         zoomed = false;
         selectedPlanet = false;
         planetIdx = 1;
-        angleSpeed2 = 0.003;
+        angleSpeed2 = 0.0024;
         angleSpeed3 = 0.002;
-        angleSpeed4 = 0.001;
+        angleSpeed4 = 0.0016;
+        angleSpeed5 = 0.0012;
+        angleSpeed6 = 0.0008;
+        angleSpeed7 = 0.0004;
         TWEEN.removeAll();
         
         new TWEEN.Tween( camera.position )
