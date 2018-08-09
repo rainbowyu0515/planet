@@ -1,0 +1,303 @@
+<html><head>
+    <title>Planet</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/slider2.css" />
+</head>
+<body>
+<!-- <SCRIPT LANGUAGE="JavaScript">
+function password(){
+  var testV = 1;
+  var pass1 = prompt('Please enter password:','');
+  while (testV < 3) {
+    if (!pass1)
+        history.go(-1);
+    if (pass1 == "930515"){
+      break;
+    }
+    testV += 1;
+    var pass1 = prompt('wrong pwd!');
+  }
+  if (pass1!="password" & testV ==3)
+    history.go(-1);
+  return " ";
+}
+document.write(password());
+</SCRIPT> -->
+<script src="js/libs/three.js"></script>
+<script src="js/libs/tween.min.js"></script>
+<script src="js/libs/jquery-3.3.1.min.js"></script>
+<script src="js/CSS3DRenderer.js"></script>
+<script src="js/libs/parallax.js"></script>
+
+<!-- <audio id="bgm" loop="loop" autoplay="autoplay"> -->
+<audio id="bgm" loop="loop" >
+  <source src="music.mp3" type="audio/mpeg" />
+Your browser does not support the audio element.
+</audio>
+
+ <ul id="scene">
+  <li class="layer" id="specks" data-depth="0.1"></li>
+  <li class="layer" id="layer-1" data-depth="0.15">
+    <div class="img" id="img-1"></div>
+  </li>
+  <li class="layer" id="layer-2" data-depth="0.25">
+    <div class="img" id="img-2"></div>
+  </li>
+  <li class="layer" id="layer-3" data-depth="0.45">
+    <div class="img" id="img-3"></div>
+  </li>
+</ul> 
+<div id="container"></div>
+<div id="cont" class="cont">
+    <div class="slider"></div>
+    <ul class="nav"></ul>
+    <div data-target='right' class="side-nav side-nav--right"></div>
+    <div data-target='left' class="side-nav side-nav--left"></div>
+</div>
+
+<button id="audioCtrl" class="audioButton">S</button>
+<button class="audioButton" style="left: 50px; width: 100px; border-radius: 15px;" onclick='window.location.href="./index.html";'>Planet</button>
+
+<script type="text/javascript" src="js/slider.js"></script>
+<script>
+    var arrCities = ['Borderless', 'ENJOY']; // Change number of slides in CSS also
+    //setup background
+    var scene = document.getElementById('scene');
+    var parallax = new Parallax(scene);
+    for (var i = 1; i < 6; i++) {
+        // if (window.CP.shouldStopExecution(1)) {
+        //     break;
+        // }
+        twinkleLoop(i);
+    }
+    // window.CP.exitedLoop(1);
+    function twinkleLoop(i) {
+        var duration = Math.random() * 5 + 3;
+        duration = duration - (495 - speed) / 100;
+        twinkle(i, duration);
+        setTimeout(function () {
+            twinkleLoop(i);
+        }, duration * 1000);
+    }
+    function twinkle(id, duration) {
+        var top = Math.floor(Math.random() * 85) + 0 + '%';
+        var left = Math.floor(Math.random() * 85) + 0 + '%';
+        $('#speck' + id).remove();
+        $('#specks').append('<div class=\'speck\' id=\'speck' + id + '\'></div>');
+        $('#speck' + id).css({
+            'top': top,
+            'left': left,
+            'animation-duration': duration + 's',
+            'animation-timing-function': 'cubic-bezier(0.250, 0.250, 0.750, 0.750)',
+            'animation-name': 'twinkle'
+        });
+    }
+    var speed = 400;
+    var table = [
+        'img/borderless/final borderless.png',
+        'img/borderless/final borderless2.png',
+        'img/borderless/final borderless3.png',
+        'img/borderless/final borderless4.png',
+        'img/borderless/final borderless5.png',
+        'img/borderless/final borderless6.png',
+        'img/borderless/final borderless7.png',
+        'img/borderless/final borderless8.png',
+        'img/borderless/final borderless9.png',
+        'img/borderless/final borderless10.png',
+        'img/borderless/final borderless11.png',
+        'img/borderless/final borderless12.png',
+        'img/borderless/final borderless13.png',
+        'img/borderless/final borderless14.png',
+        'img/borderless/final borderless15.png',
+        'img/borderless/final borderless16.png',
+        'img/borderless/final borderless17.png',
+        'img/borderless/final borderless18.png'
+        
+    ];
+
+    var camera, scene, renderer;
+    var popoutObj;
+    var ispoping = false;
+    var imgWidth = 2400;
+
+    var objects = [];
+    var targets = { flow:[]};
+
+    function init() {
+        camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
+        camera.position.y = 0;
+        camera.position.z = 3000;
+        scene = new THREE.Scene();
+        camera.lookAt(scene.position);
+
+        //creat txt blocks
+        // for(let i = 0; i < txts.length; i++){
+        //     var element = document.createElement( 'div' );
+        //     element.className = 'element2';
+        //     element.style.backgroundColor = 'rgba(0,127,127,' + ( Math.random() * 0.5 + 0.25 ) + ')';
+
+        //     var symbol = document.createElement( 'img' );
+        //     symbol.className = 'symbol2';
+        //     symbol.src = txts[ i ];
+        //     element.appendChild( symbol );
+
+        //     var close = document.createElement( 'div' );
+        //     close.className = 'closeButton';
+        //     close.textContent = 'X';
+        //     element.appendChild( close );
+
+        //     close.onclick = function(){
+        //         closeTxt();
+        //     }
+
+        //     var object = new THREE.CSS3DObject( element );
+        //     object.position.x = -10000;
+        //     object.position.y = 0;
+        //     object.position.z = 0;
+        //     scene.add( object );
+        //     txtBlocks.push(object);
+        // }
+
+        createFlow(table, objects);
+        initAnimate();
+
+
+        renderer = new THREE.CSS3DRenderer();
+        renderer.setSize( window.innerWidth, window.innerHeight );
+        renderer.domElement.style.position = 'absolute';
+        document.getElementById( 'container' ).appendChild( renderer.domElement );
+
+        window.addEventListener( 'resize', onWindowResize, false );
+    }
+
+    function closeTxt(){
+        TWEEN.removeAll();
+
+        for ( var i = 0; i < txtBlocks.length; i ++ ) {
+
+            var object = txtBlocks[ i ];
+
+            new TWEEN.Tween( object.position )
+                .to( { x: -10000, y: 0, z: 0 }, 1000 )
+                .easing( TWEEN.Easing.Exponential.InOut )
+                .start();
+
+        }
+
+        new TWEEN.Tween( this )
+            .to( {}, 1000 )
+            .onUpdate( render )
+            .start();
+    }
+
+    function createFlow(data, objs){
+        var vector = new THREE.Vector3();
+        var spherical = new THREE.Spherical();
+        for ( var i = 0; i < data.length; i++ ) {
+            var element = document.createElement( 'div' );
+            element.id = 'element'+i;
+            element.className = 'element3';
+            element.style.backgroundColor = 'rgba(0,127,127,' + ( Math.random() * 0.5 + 0.25 ) + ')';
+            element.onclick = function(){
+                if(ispoping){
+                    console.log('stop');
+                    ispoping = false;
+                    flowSpeed = 0;
+                }else{
+                    console.log('move');
+                    ispoping = true;
+                    flowSpeed = 3;
+                }
+            }
+
+            var symbol = document.createElement( 'img' );
+            symbol.className = 'symbol';
+            symbol.src = data[ i ];
+            element.appendChild( symbol );
+
+            var object = new THREE.CSS3DObject( element );
+            object.position.x = i*imgWidth - data.length*imgWidth/2
+            console.log(object.position.x);
+            object.position.y = Math.random() * 1600 - 800;
+            object.position.z = Math.random() * 8000 - 4000;
+
+            
+            scene.add(object);
+            objs.push( object );
+        }
+    }
+
+    function initAnimate(){
+        TWEEN.removeAll();
+
+        for ( var i = 0; i < objects.length; i ++ ) {
+
+            var object = objects[ i ];
+
+            new TWEEN.Tween( object.position )
+                .to( { x: object.position.x, y: 0, z: i }, Math.random() * 2000 + 2000 )
+                .easing( TWEEN.Easing.Exponential.InOut )
+                .start();
+        }
+
+        new TWEEN.Tween( this )
+            .to( {}, 2000 )
+            .onUpdate( render )
+            .start();
+    }
+
+    function slideTxt(posi, idx){
+        console.log(posi);
+        TWEEN.removeAll();
+
+        var object = txtBlocks[ idx ];
+        console.log(object);
+
+        new TWEEN.Tween( object.position )
+            .to( { x: posi.x, y: posi.y, z: posi.z }, 1000 )
+            .easing( TWEEN.Easing.Exponential.InOut )
+            .start();
+
+        new TWEEN.Tween( this )
+            .to( {}, 1000 )
+            .onUpdate( render )
+            .start();
+    }
+
+    function transform(t){}
+
+    function onWindowResize() {
+
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+
+        renderer.setSize( window.innerWidth, window.innerHeight );
+
+        render();
+
+    }
+
+    function animate() {
+        render();
+        requestAnimationFrame( animate );
+        TWEEN.update();
+    }
+
+    var flowSpeed = 3;
+    function render() {
+        for(let i = 0; i < objects.length; i++){
+            objects[i].position.x -= flowSpeed;
+            if(objects[i].position.x < -table.length*imgWidth/2){
+                objects[i].position.x = table.length*imgWidth/2;
+            }
+        }
+
+        renderer.render( scene, camera );
+    }
+
+</script>
+
+
+</body></html>

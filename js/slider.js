@@ -21,7 +21,7 @@ $(document).ready(function () {
 	var diff = 0;
 
 	// Generating slides
-	var arrCities = ['Planet', 'ENJOY']; // Change number of slides in CSS also
+	
 	var numOfCities = arrCities.length;
 	var arrCitiesDivided = [];
 
