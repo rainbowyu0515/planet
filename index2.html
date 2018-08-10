@@ -117,6 +117,41 @@ Your browser does not support the audio element.
         
     ];
 
+    function preloadImg(list,imgs) {
+        console.log('preloading images');
+        var def = $.Deferred(),
+            len = list.length;
+        $(list).each(function(i,e) {
+            var img = new Image();
+            img.src = e;
+            if(img.complete) {
+                imgs[i] = img;
+                len--;
+                if(len == 0) {
+                    def.resolve();
+                }
+            }
+            else {
+                img.onload = (function(j) {
+                    return function() {
+                        imgs[j] = img
+                        len--;
+                        if(len == 0) {
+                            def.resolve();
+                        }
+                    };
+                })(i);
+                img.onerror = function() {
+                    len--;
+                    console.log('fail to load image');
+                };
+            }
+        });
+        return def.promise();
+    }
+    var imgs1 = [];
+    preloadImg(table, imgs1);
+
     var camera, scene, renderer;
     var popoutObj;
     var ispoping = false;
@@ -160,8 +195,7 @@ Your browser does not support the audio element.
         //     txtBlocks.push(object);
         // }
 
-        createFlow(table, objects);
-        initAnimate();
+        createFlow(imgs1, objects, initAnimate);
 
 
         renderer = new THREE.CSS3DRenderer();
@@ -192,9 +226,11 @@ Your browser does not support the audio element.
             .start();
     }
 
-    function createFlow(data, objs){
+    function createFlow(data, objs, callback){
         var vector = new THREE.Vector3();
         var spherical = new THREE.Spherical();
+        var currentPosition = -data.length*imgWidth/2;
+        var lastWidth = 0;
         for ( var i = 0; i < data.length; i++ ) {
             var element = document.createElement( 'div' );
             element.id = 'element'+i;
@@ -212,21 +248,25 @@ Your browser does not support the audio element.
                 }
             }
 
-            var symbol = document.createElement( 'img' );
-            symbol.className = 'symbol';
-            symbol.src = data[ i ];
-            element.appendChild( symbol );
+            data[ i ].className = 'symbol';
+            console.log(data[ i ].width);
+            element.appendChild( data[ i ] );
 
             var object = new THREE.CSS3DObject( element );
-            object.position.x = i*imgWidth - data.length*imgWidth/2
+            object.position.x = currentPosition + lastWidth + 10 + data[ i ].width/2;
             console.log(object.position.x);
+            lastWidth = data[ i ].width/2;
+            currentPosition = object.position.x;
             object.position.y = Math.random() * 1600 - 800;
             object.position.z = Math.random() * 8000 - 4000;
 
             
             scene.add(object);
             objs.push( object );
+       
         }
+
+        callback();
     }
 
     function initAnimate(){
