@@ -21,8 +21,7 @@ $(document).ready(function () {
 	var diff = 0;
 
 	// Generating slides
-	
-	var numOfCities = arrCities.length;
+    var numOfCities = arrCities.length;
 	var arrCitiesDivided = [];
 
 	arrCities.map(function (city) {

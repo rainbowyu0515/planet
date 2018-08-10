@@ -31,9 +31,8 @@ document.write(password());
 <script src="js/CSS3DRenderer.js"></script>
 <script src="js/libs/parallax.js"></script>
 
-<!-- <audio id="bgm" loop="loop" autoplay="autoplay"> -->
-<audio id="bgm" loop="loop" >
-  <source src="music.mp3" type="audio/mpeg" />
+<audio id="bgm" loop="loop" autoplay="autoplay">
+  <source src="music2.mp3" type="audio/mpeg" />
 Your browser does not support the audio element.
 </audio>
 
@@ -195,7 +194,7 @@ Your browser does not support the audio element.
         //     txtBlocks.push(object);
         // }
 
-        createFlow(imgs1, objects, initAnimate);
+        createFlow(imgs1, objects);
 
 
         renderer = new THREE.CSS3DRenderer();
@@ -226,10 +225,10 @@ Your browser does not support the audio element.
             .start();
     }
 
-    function createFlow(data, objs, callback){
+    function createFlow(data, objs){
         var vector = new THREE.Vector3();
         var spherical = new THREE.Spherical();
-        var currentPosition = -data.length*imgWidth/2;
+        var currentPosition = 0;
         var lastWidth = 0;
         for ( var i = 0; i < data.length; i++ ) {
             var element = document.createElement( 'div' );
@@ -253,12 +252,12 @@ Your browser does not support the audio element.
             element.appendChild( data[ i ] );
 
             var object = new THREE.CSS3DObject( element );
-            object.position.x = currentPosition + lastWidth + 10 + data[ i ].width/2;
+            object.position.x = currentPosition;
             console.log(object.position.x);
             lastWidth = data[ i ].width/2;
-            currentPosition = object.position.x;
-            object.position.y = Math.random() * 1600 - 800;
-            object.position.z = Math.random() * 8000 - 4000;
+            currentPosition += 10 + data[ i ].width;
+            object.position.y = 0;
+            object.position.z = 0;
 
             
             scene.add(object);
@@ -266,7 +265,7 @@ Your browser does not support the audio element.
        
         }
 
-        callback();
+        //callback();
     }
 
     function initAnimate(){
@@ -325,13 +324,13 @@ Your browser does not support the audio element.
         TWEEN.update();
     }
 
-    var flowSpeed = 3;
+    var flowSpeed = 8;
     function render() {
         for(let i = 0; i < objects.length; i++){
             objects[i].position.x -= flowSpeed;
-            if(objects[i].position.x < -table.length*imgWidth/2){
-                objects[i].position.x = table.length*imgWidth/2;
-            }
+            // if(objects[i].position.x < -table.length*imgWidth/2){
+                // objects[i].position.x = table.length*imgWidth/2;
+            // }
         }
 
         renderer.render( scene, camera );

@@ -66,8 +66,7 @@ Your browser does not support the audio element.
 
 <script type="text/javascript" src="js/slider.js"></script>
 <script>
-    var arrCities = ['Planet', 'ENJOY']; // Change number of slides in CSS also
-    //setup background
+    var arrCities = ['Planet', 'ENJOY']; // Change number of slides in CSS also//setup background
     var scene = document.getElementById('scene');
     var parallax = new Parallax(scene);
     for (var i = 1; i < 6; i++) {
@@ -349,23 +348,23 @@ Your browser does not support the audio element.
         group2.rotation.set(0, 0, 0);   
 
         group3 = new THREE.Group();
-        group3.position.set(2600 * Math.cos(Math.PI/3), 0, 2600 * Math.sin(Math.PI/3));
+        group3.position.set(2600, 0, 0);
         group3.rotation.set(0, 0, 0);   
 
         group4 = new THREE.Group();
-        group4.position.set(3600 * Math.cos(2*Math.PI/3), 0, 3600 * Math.sin(2*Math.PI/3));
+        group4.position.set(3600, 0, 0);
         group4.rotation.set(0, 0, 0); 
 
         group5 = new THREE.Group();
-        group5.position.set(4600 * Math.cos(Math.PI), 0, 4600 * Math.sin(Math.PI));
+        group5.position.set(4600, 0, 0);
         group5.rotation.set(0, 0, 0); 
 
         group6 = new THREE.Group();
-        group6.position.set(5600 * Math.cos(4*Math.PI/3), 0, 5600 * Math.sin(4*Math.PI/3));
+        group6.position.set(5600, 0, 0);
         group6.rotation.set(0, 0, 0); 
 
         group7 = new THREE.Group();
-        group7.position.set(6600 * Math.cos(5*Math.PI/3), 0, 6600 * Math.sin(5*Math.PI/3));
+        group7.position.set(6600, 0, 0);
         group7.rotation.set(0, 0, 0);        
 
         camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
@@ -449,7 +448,7 @@ Your browser does not support the audio element.
 
         for ( var i = 0, l = objects2_1.length; i < l; i ++ ) {
 
-            var theta = i * 0.25 + Math.PI;
+            var theta = i * 0.3 + Math.PI;
             var y = 0;
 
             var object = new THREE.Object3D();
@@ -472,7 +471,7 @@ Your browser does not support the audio element.
 
         for ( var i = 0, l = objects2_2.length; i < l; i ++ ) {
 
-            var theta = i * 0.25 + Math.PI;
+            var theta = i * 0.3 + Math.PI;
             // var y = - ( i * 12 ) + 450;
             var y = 0;
 
@@ -1382,11 +1381,11 @@ Your browser does not support the audio element.
     }
 
     var angle2 = 0;
-    var angle3 = Math.PI/3;
-    var angle4 = 2*Math.PI/3;
-    var angle5 = Math.PI;
-    var angle6 = 4*Math.PI/3;
-    var angle7 = 5*Math.PI/3;
+    var angle3 = 0;
+    var angle4 = 0;
+    var angle5 = 0;
+    var angle6 = 0;
+    var angle7 = 0;
     var angleSpeed2 = 0.0024;
     var angleSpeed3 = 0.002;
     var angleSpeed4 = 0.0016;
